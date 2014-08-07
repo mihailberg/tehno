@@ -48,3 +48,4 @@ bitrix/virtual_file_system.php
 bitrix/web.config
 bitrix/wizards/
 bitrix/managed_flags
+bitrix/.settings.php
