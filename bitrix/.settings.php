@@ -27,7 +27,7 @@ return array (
   array (
     'value' => 
     array (
-      'debug' => false,
+      'debug' => true,
       'handled_errors_types' => 4437,
       'exception_errors_types' => 4437,
       'ignore_silence' => false,
@@ -44,10 +44,10 @@ return array (
       'default' => 
       array (
         'className' => '\\Bitrix\\Main\\DB\\MysqlConnection',
-        'host' => 'u145752.mysql.masterhost.ru',
+        'host' => 'localhost',
         'database' => 'u145752_2',
-        'login' => 'u145752_2',
-        'password' => '5nrogRusAe.',
+        'login' => 'root',
+        'password' => '',
         'options' => 2,
       ),
     ),
