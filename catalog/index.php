@@ -114,7 +114,7 @@ else $sectionViewMode = "TEXT";
       2 => "PRODUCTION",
       3 => "H2",
       4 => "H3",
-      5 => "KB_URL",
+      5 => "R_HEAD",
       6 => "PRICE1",
       7 => "PRICE2",
       8 => "PRICE3",
@@ -146,7 +146,7 @@ else $sectionViewMode = "TEXT";
       2 => "PRODUCTION",
       3 => "H2",
       4 => "H3",
-      5 => "KB_URL",
+      5 => "R_HEAD",
       6 => "PRICE1",
       7 => "PRICE2",
       8 => "PRICE3",
@@ -230,7 +230,7 @@ else $sectionViewMode = "TEXT";
     "SEF_URL_TEMPLATES" => array(
       "sections" => "",
       "section" => "#SECTION_CODE#/",
-      "element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+      "element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
       "compare" => "",
     )
   ),
