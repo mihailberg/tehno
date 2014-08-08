@@ -1,3 +1,3 @@
 <?
-$sSectionName="profile";
+$sSectionName="Личный кабинет";
 ?>

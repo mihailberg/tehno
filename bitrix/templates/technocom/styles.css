@@ -1919,12 +1919,12 @@ input.vik-inptxt-style__small, .vik-order-fast input.vik-inptxt-style__small{
 .contacts__callback:hover,
 .contacts__skype,
 .contacts__skype:hover,
-.d_sort,
-.d_sort:hover,
+a.d_sort,
+a.d_sort:hover,
 .js-tabs a,
-.js-tabs a:hover,
+.js-tabs a:hover
 {
-    border-bottom: 0px;
+    border-bottom: 0px!important;
 }
 
 .add2basket-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); }

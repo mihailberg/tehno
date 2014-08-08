@@ -59,7 +59,6 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
         </div>
         <div class="x_tabs__item selected">
 
-
 <?            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items.php");?>
 
 

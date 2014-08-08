@@ -1,7 +1,7 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?
 
-
+//var_dump($arResult);die();
 
 //echo ShowError($arResult["ERROR_MESSAGE"]);
 
@@ -10,6 +10,10 @@ $bDeleteColumn = false;
 $bWeightColumn = false;
 $bPropsColumn  = false;
 $bPriceType    = false;
+
+
+//var_dump($arResult);die();
+//CCatalogProduct::
 
 if ($normalCount > 0):
 ?>
@@ -27,6 +31,7 @@ if ($normalCount > 0):
 
 //                        print_r($arItem);
 //                        print_r($arResult);
+//                        CCatalogProduct::GetById();
 //                        die();
 				?>
 					<tr id="<?=$arItem["ID"]?>">
@@ -402,7 +407,7 @@ if ($normalCount > 0):
                             <span><?=$arResult['allSum_FORMATED'];?></span> руб.
                         </div>
                         <div class="recycle-page__nds">(с учетом Ќƒ—)</div>
-                        <div><a href="#" class="btn btn_green btn_big">ќформить заказ</a></div>
+                        <div><a href="/order/" class="btn btn_green btn_big">ќформить заказ</a></div>
                     </td>
                 </tr>
 

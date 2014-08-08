@@ -23,15 +23,17 @@ if (count($arResult["ITEMS"]) != 0) {
       <?
       foreach ($arResult["ITEMS"] as $arItemKey => $arItem) {
         if ($arItem["~IBLOCK_SECTION_ID"] == $arSection["ID"]) {
+            $p = CCatalogProduct::GetOptimalPrice($arItem['ID']);
+            $price = $p['PRICE']['PRICE'];
           ?>
           <div class="product">
             <div class="product__pic">
               <a href="<?=$arItem['DETAIL_PAGE_URL']?>"><img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" alt="<?=$arItem["NAME"]?>"></a>
             </div>
             <div class="product__title"><?=$arItem["NAME"]?></div>
-            <div class="product__code">арт. <?=$arItem["DISPLAY_PROPERTIES"]["ARTICLE"]["VALUE"]?></div>
+            <div class="product__code">арт. <?=$arItem["PROPERTIES"]["ARTICLE"]["VALUE"]?></div>
             <div class="product__details">
-              <div class="product__price"><?=$arItem["DISPLAY_PROPERTIES"]["PRICE1"]["VALUE"]?> Р</div>
+              <div class="product__price"><?=$price?> <i class="icon-rub"></i></div>
               <div class="product__buy">
                 <a class="btn btn_small btn_green js-add2basket" href="<?=$arItem['ADD_URL']?>">В корзину</a>
               </div>

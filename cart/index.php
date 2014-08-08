@@ -22,7 +22,7 @@ $APPLICATION->SetTitle("Title");
 			10 => "PROPERTY_ARTICLE",
 			11 => "PROPERTY_PRODUCTION",
 		),
-		"PATH_TO_ORDER" => "/personal/order.php",
+		"PATH_TO_ORDER" => "/order",
 		"HIDE_COUPON" => "N",
 		"PRICE_VAT_SHOW_VALUE" => "N",
 		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",

@@ -5,11 +5,9 @@
       <h1><?=$arResult["NAME"]?></h1>
       <div class="product-detail__art">арт. <?=$arResult["DISPLAY_PROPERTIES"]["ARTICLE"]["VALUE"]?></div>
     </div>
-    <?if(!empty($arResult['DISPLAY_PROPERTIES']['KB_URL']['VALUE'])):?>
+    <?if(!empty($arResult['DISPLAY_PROPERTIES']['R_HEAD']['DISPLAY_VALUE'])):?>
     <div class="product-detail__rhead">
-      <i class="question__pic"></i>
-      Не знаете, как правильно выбрать пильную шину?
-      <div class="product-detail_rhead_bottom">Наша база знаний поможет Вам <a href="http://<?=$arResult['DISPLAY_PROPERTIES']['KB_URL']['VALUE']?>">подобрать то, что нужно!</a></div>
+        <?=$arResult['DISPLAY_PROPERTIES']['R_HEAD']['DISPLAY_VALUE']?>
     </div>
     <?endif;?>
   </div>

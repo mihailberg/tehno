@@ -50,9 +50,10 @@ var add2basket = {
         type: 'post',
         url: url,
         cached: false,
-        success: function() {
+        success: function(t) {
           add2basket.modalShow();
-          setTimeout(add2basket.modalHide, 2000);
+          console.log(t);
+          setTimeout(add2basket.modalHide, 1500);
         }
       });
       return false;

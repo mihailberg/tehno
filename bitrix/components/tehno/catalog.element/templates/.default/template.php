@@ -5,13 +5,11 @@
       <h1><?=$arResult["NAME"]?></h1>
       <div class="product-detail__art">арт. <?=$arResult["DISPLAY_PROPERTIES"]["ARTICLE"]["VALUE"]?></div>
     </div>
-    <?if(!empty($arResult['DISPLAY_PROPERTIES']['KB_URL']['VALUE'])):?>
-      <div class="product-detail__rhead">
-        <i class="question__pic"></i>
-        Не знаете, как правильно выбрать пильную шину?
-        <div class="product-detail_rhead_bottom">Наша база знаний поможет Вам <a href="http://<?=$arResult['DISPLAY_PROPERTIES']['KB_URL']['VALUE']?>">подобрать то, что нужно!</a></div>
-      </div>
-    <?endif;?>
+      <?if(!empty($arResult['DISPLAY_PROPERTIES']['R_HEAD']['DISPLAY_VALUE'])):?>
+          <div class="product-detail__rhead">
+              <?=$arResult['DISPLAY_PROPERTIES']['R_HEAD']['DISPLAY_VALUE']?>
+          </div>
+      <?endif;?>
   </div>
   <div class="product-detail__body clearfix">
     <div class="product-detail__left">
@@ -36,11 +34,26 @@
       <?if(!empty($arResult['DISPLAY_PROPERTIES']['H2']['VALUE'])):?>
         <h2><?=$arResult['DISPLAY_PROPERTIES']['H2']['VALUE']?></h2>
       <?endif;?>
+        <?
+        global $USER;
+        if($USER->IsAuthorized()){
+            //Нормальную цену
+            $p = CCatalogProduct::GetOptimalPrice($arResult['ID']);
+            $price = $p['PRICE']['PRICE'];
+        } else {
+            $prices = GetCatalogProductPriceList($arResult['ID']);
+        }
+        ?>
+
       <?if(!empty($arResult['DISPLAY_PROPERTIES']['H3']['VALUE'])):?>
         <h3><?=$arResult['DISPLAY_PROPERTIES']['H2']['VALUE']?></h3>
       <?endif;?>
-      <div class="product-detail__cost"><span><?=$arResult["DISPLAY_PROPERTIES"]["PRICE1"]["VALUE"]?></span> <span class="product-detail__currency"></span><a class="btn btn_green btn_big js-add2basket" href="<?=$arResult['ADD_URL']?>">В корзину</a> <a href="#" class="btn btn_silver btn_middle">Отложить</a> <a href="#" class="btn btn_blue btn_middle"><i class="callback__pic"></i>Позвонить мне</a></div>
-      <div class="product-detail__cost_after">Цена после <a href="#">регистрации</a> <span><?=$arResult["DISPLAY_PROPERTIES"]["PRICE2"]["VALUE"]?> P</span></div>
+      <?if($USER->IsAuthorized()): // Если пользователь авторизован, выводим одну цену ?>
+          <div class="product-detail__cost"><span><?=$price?></span> <span class="product-detail__currency"></span><a class="btn btn_green btn_big js-add2basket" href="<?=$arResult['ADD_URL']?>">В корзину</a> <a href="#" class="btn btn_silver btn_middle">Отложить</a> <a href="#" class="btn btn_blue btn_middle"><i class="callback__pic"></i>Позвонить мне</a></div>
+      <? else: //Если не авторизован Сначала цену 0 потом цену 1?>
+          <div class="product-detail__cost"><span><?=(int)$prices[0]["PRICE"]?></span> <span class="product-detail__currency"></span><a class="btn btn_green btn_big js-add2basket" href="<?=$arResult['ADD_URL']?>">В корзину</a> <a href="#" class="btn btn_silver btn_middle">Отложить</a> <a href="#" class="btn btn_blue btn_middle"><i class="callback__pic"></i>Позвонить мне</a></div>
+          <div class="product-detail__cost_after">Цена после <a href="/registration">регистрации</a> <span><?=(int)$prices[1]["PRICE"]?> P</span></div>
+      <?endif;?>
       <?if(!empty($arResult['DISPLAY_PROPERTIES']['COUNT']['VALUE'])):?>
         <!--<div class="product-detail__exist">В наличии: шт.</div>-->
       <?endif;?>
