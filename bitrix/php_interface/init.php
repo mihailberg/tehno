@@ -1,6 +1,11 @@
 <?
 AddEventHandler("main", "OnAfterUserRegister", Array("MyEvents", "OnAfterUserRegisterHandler"));
 AddEventHandler("catalog", "OnGetOptimalPrice", Array("MyEvents", "OnGetOptimalPrice"));
+
+
+COption::SetOptionString("catalog", "DEFAULT_SKIP_SOURCE_CHECK", "Y" );
+COption::SetOptionString("sale", "secure_1c_exchange", "N" );
+
 class MyEvents
 {
     /**
