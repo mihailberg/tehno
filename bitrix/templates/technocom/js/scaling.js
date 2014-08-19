@@ -34,7 +34,7 @@ function setCookie(name, value, options) {
     document.cookie = updatedCookie;
 }
 
-// РІРѕР·РІСЂР°С‰Р°РµС‚ cookie СЃ РёРјРµРЅРµРј name, РµСЃР»Рё РµСЃС‚СЊ, РµСЃР»Рё РЅРµС‚, С‚Рѕ undefined
+// возвращает cookie с именем name, если есть, если нет, то undefined
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -50,11 +50,11 @@ function deleteCookie(name) {
 
 $( document ).ready(function() {
 
-    //Date РґР»СЏ РєСѓРєРѕРІ +1 РґРµРЅСЊ РѕС‚ С‚РµРєСѓС‰РµРіРѕ РјРѕРјРµРЅС‚Р°
+    //Date для куков +1 день от текущего момента
     var date = new Date;
     date.setDate( date.getDate() + 1 );
 
-	//РїРµСЂРµСЃС‡РёС‚С‹РІР°РµРј Р·СѓРј
+	//пересчитываем зум
 	function changeZoom() {
 		freeHeight = $('.out').height();
 		freeWidth = document.body.clientWidth;
@@ -68,7 +68,7 @@ $( document ).ready(function() {
         setCookie('clientHeight',bodyHeight,{path:'/', expires: date.toUTCString()});
 	}
 	
-	//РїРµСЂРµСЃС‡РёС‚С‹РІР°РµРј Р·СѓРј
+	//пересчитываем зум
 	function setZoom(zoom) {
 		$('.out').css({'-webkit-transform-origin':'left top'});
 		$('.out').css({'-ms-transform-origin':'left top'});
@@ -80,7 +80,7 @@ $( document ).ready(function() {
 		$('.out').css({'-o-transform':'scale(' + zoom + ')'});
 		$('.out').css({'transform':'scale(' + zoom + ')'});
 
-        //РљСѓРєР° Р·СѓРјС‹
+        //Кука зумы
         setCookie('clientZoom', zoom, {path:'/',expires: date.toUTCString()});
 	}
 	

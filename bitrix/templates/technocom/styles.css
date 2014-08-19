@@ -1665,11 +1665,15 @@ input.vik-inptxt-style__small, .vik-order-fast input.vik-inptxt-style__small{
 }
 .recycle-page__actions a {
     color: #999999;
-    border-bottom-color: #999999;
+    /*border-bottom-color: #999999;*/
+    text-decoration: none;
+    border-bottom:0px;
 }
 .recycle-page__actions_hold a {
     color: #999999;
     font-size: 28px;
+    text-decoration: none;
+    border-bottom:0px;
 }
 .recycle-page__actions_hold {
     padding: 45px 0 0 60px;
@@ -1677,6 +1681,9 @@ input.vik-inptxt-style__small, .vik-order-fast input.vik-inptxt-style__small{
 }
 .link__green {
     color: #04ab00 !important;
+
+
+
 }
 .recycle-page__count .minus, .recycle-page__count .plus {
     position: absolute;

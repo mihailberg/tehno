@@ -15,7 +15,7 @@ $bPriceType    = false;
 //var_dump($arResult);die();
 //CCatalogProduct::
 
-if ($normalCount > 0):
+
 ?>
 <!--<div id="basket_items_list">-->
 <!--	<div class="bx_ordercart_order_table_container">-->
@@ -24,12 +24,13 @@ if ($normalCount > 0):
             <tbody>
 
 				<?
+if ($normalCount > 0):
 				foreach ($arResult["GRID"]["ROWS"] as $k => $arItem):
 					if ($arItem["DELAY"] == "N" && $arItem["CAN_BUY"] == "Y"):
 
                         $arItem["PRICE"] = (int)$arItem["PRICE"];
 
-//                        print_r($arItem);
+                        var_dump($arItem);
 //                        print_r($arResult);
 //                        CCatalogProduct::GetById();
 //                        die();
@@ -48,7 +49,7 @@ if ($normalCount > 0):
                         <td class="recycle-page__name">
                             <div>
                                 <img src="<?=$url?>"><a href="<?=$arItem["DETAIL_PAGE_URL"] ?>"><?=$arItem["NAME"];?></a>
-                                <div class="recycle-page__art"><?=$arItem["PROPERTY_ARTICLE_VALUE"]?></div>
+                                <div class="recycle-page__art">арт. <?=$arItem["PROPERTY_ARTICLE_VALUE"]?></div>
                             </div>
                         </td>
                         <td><div class="recycle-page__cost"><?=$arItem["PRICE_FORMATED"]?> руб. x</div></td>
@@ -61,7 +62,13 @@ if ($normalCount > 0):
                             </div>
                         </td>
                         <td><div class="recycle-page__sum"><span><?=$arItem["SUM"]?></span>  руб.</div></td>
-                        <td class="recycle-page__actions"><a class="btn__hold" href="#">Отложить</a><br><a href="#" class="btn__delete">Удалить</a></td>
+                        <td class="recycle-page__actions">
+<!--                            <a class="btn__hold" href="#">Отложить</a>-->
+                            <a href="<?=str_replace("#ID#", $arItem["ID"], $arUrls["delay"])?>"><?=GetMessage("SALE_DELAY")?></a>
+                            <br />
+                            <a href="<?=str_replace("#ID#", $arItem["ID"], $arUrls["delete"])?>"><?=GetMessage("SALE_DELETE")?></a>
+<!--                            <a href="#" class="btn__delete">Удалить</a>-->
+                        </td>
                     </tr>
                         <?
 
@@ -409,7 +416,17 @@ if ($normalCount > 0):
                         <div class="recycle-page__nds">(с учетом НДС)</div>
                         <div><a href="/order/" class="btn btn_green btn_big">Оформить заказ</a></div>
                     </td>
-                </tr>
+                </tr><?
+    else:
+    ?>
+            <tr>
+                <td colspan="<?=$numCells?>" style="text-align:center"><br />
+                    <div class=""><?=GetMessage("SALE_NO_ITEMS");?></div>
+                </td>
+            </tr>
+<?
+endif;
+                ?>
 
 			</tbody>
 		</table>
@@ -501,19 +518,3 @@ if ($normalCount > 0):
 </div>
 <?
  */
-else:
-?>
-<div id="basket_items_list">
-	<table>
-		<tbody>
-			<tr>
-				<td colspan="<?=$numCells?>" style="text-align:center">
-					<div class=""><?=GetMessage("SALE_NO_ITEMS");?></div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<?
-endif;
-?>

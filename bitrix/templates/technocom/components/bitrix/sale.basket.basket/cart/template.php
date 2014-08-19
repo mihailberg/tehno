@@ -54,8 +54,8 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 
     <div class="x_tabs">
         <div class="x_tabs__links">
-            <a class="selected" href="#"><span>Готовые к заказу (<span class="count__recycle">2</span>)</span></a>
-            <a href="#"><span>Отложенные (<span class="count__hold">1</span>)</span></a>
+            <a class="selected" href="#"><span>Готовые к заказу (<span class="count__recycle"><?=$normalCount?></span>)</span></a>
+            <a href="#"><span>Отложенные (<span class="count__hold"><?=$delayCount?></span>)</span></a>
         </div>
         <div class="x_tabs__item selected">
 
@@ -67,28 +67,14 @@ if (strlen($arResult["ERROR_MESSAGE"]) <= 0)
 
         <!--  Отложенные -->
         <div class="x_tabs__item">
-            <table class="table__hold">
-                <thead><tr><th width="1130" class="recycle-table__name">Название</th><th width="230"></th><th>Стоимость</th><th></th></tr></thead>
-                <tbody>
-                <tr>
-                    <td class="recycle-page__name"><div><img src="img/temp-recycle.jpg"><a href="#">Пильная шина Iggesund Forest R8 2801-55</a><div class="recycle-page__art">арт. А0000020233</div></div></td>
-                    <td></td>
-                    <td><div data-cost="3400" class="recycle-page__sum"><span>3 400</span> руб.</div></td>
-                    <td class="recycle-page__actions_hold"><a class="link__green btn__addrecycle" href="#">Добавить в корзину для оформления заказа</a><br><a href="#" class="btn__delete">Удалить</a></td>
-                </tr>
-                </tbody>
-            </table>
+<?            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delay.php");?>
+
         </div>
     </div>
 
 
 
 <? /*
-
-
-
-
-
 
 
 

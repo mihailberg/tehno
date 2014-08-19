@@ -6,9 +6,17 @@ $APPLICATION->SetTitle("ќформление заказа");
 	"",
 	Array(
 	)
-);?>
-<br /><br /><?$APPLICATION->IncludeComponent(
+);?> <br>
+ <br>
+ <?$APPLICATION->IncludeComponent(
 	"bitrix:sale.order.full",
+	"",
+	Array(
+	)
+);?><br>
+&lt;!!!!!!!!!!!!!!!&gt;<br>
+<?$APPLICATION->IncludeComponent(
+	"bitrix:sale.basket.basket",
 	"",
 	Array(
 	)

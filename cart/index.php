@@ -21,6 +21,8 @@ $APPLICATION->SetTitle("Title");
 			9 => "SUM",
 			10 => "PROPERTY_ARTICLE",
 			11 => "PROPERTY_PRODUCTION",
+			12 => "PROPERTY_PHOTOS",
+			13 => "PROPERTY_CML2_MANUFACTURER",
 		),
 		"PATH_TO_ORDER" => "/order",
 		"HIDE_COUPON" => "N",

@@ -7,6 +7,7 @@ $APPLICATION->SetTitle("Контакты");
 
 //Выбираем контакты
 CModule::IncludeModule('iblock');
+
 $contactList = CIBlockElement::GetList(
     array("SORT"=>"DESC"),
     array('IBLOCK_ID'=>19),
@@ -65,6 +66,11 @@ $c = $currentFilial = $_SESSION['CONTACTS'];
                 <ul class="contacts__regions">
                     <?    //Выводим филиалы по городам
                     $sections = CIBlockSection::GetList(array("SORT"=>"ASC"), array('IBLOCK_ID' => 27, 'ID' => $sectionList),  true);
+//                    while($f = $sections->Fetch()){
+//                        print_r($f);
+//                    }
+
+
                     while($sect = $sections->GetNext()){
                         echo '<li'.($currentFilial['PROPERTY_REGION_VALUE'] == $sect['ID'] ? ' class="selected"':'').'><a href="#'.$sect['ID'].'" >'.$sect['NAME'].'</a>';
                         echo '<ul> ';

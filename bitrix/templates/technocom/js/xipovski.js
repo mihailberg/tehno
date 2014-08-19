@@ -29,14 +29,14 @@ $(function() {
         e.preventDefault();
         if ($(this).hasClass('btn_cancel')) {
             var oldcount = parseInt($(this).closest('tr').find('input').data('oldcount'));
-            $(this).closest('tr').find('input').val(oldcount);            
-            calcRecycle();    
+            $(this).closest('tr').find('input').val(oldcount);
+            calcRecycle();
         }
         else {
             $(this).closest('tr').find('input').data('oldcount', '');
-        }       
+        }
         $(this).closest('tr').removeClass('active');
-                                
+
     });
 
 
@@ -95,10 +95,10 @@ $(function() {
     };
     
     $('body').on('click', '.recycle-page .btn__delete', function(e) {
-        e.preventDefault();
-        $(this).closest('tr').remove();
-        calcCount();
-        calcRecycle();
+//        e.preventDefault();
+//        $(this).closest('tr').remove();
+//        calcCount();
+//        calcRecycle();
     });    
     
     $('body').on('click', '.recycle-page .btn__hold', function(e) {
@@ -109,7 +109,7 @@ $(function() {
         //$(this).closest('tr').remove();
         var hold = $(this).closest('tr').removeClass('active').appendTo($('.table__hold')),
             cost = hold.find('input[data-cost]').data('cost'),
-            buttons = '<a class="link__green btn__addrecycle" href="#">Р”РѕР±Р°РІРёС‚СЊ РІ РєРѕСЂР·РёРЅСѓ РґР»СЏ РѕС„РѕСЂРјР»РµРЅРёСЏ Р·Р°РєР°Р·Р°</a><br><a href="#" class="btn__delete">РЈРґР°Р»РёС‚СЊ</a>';
+            buttons = '<a class="link__green btn__addrecycle" href="#">Добавить в корзину для оформления заказа</a><br><a href="#" class="btn__delete">Удалить</a>';
         
         hold.find('td:eq(2)').remove().end().find('.recycle-page__sum').attr('data-cost', cost).find('> span').text(cost).end().end().find('.recycle-page__actions').addClass('recycle-page__actions_hold').removeClass('.recycle-page__actions').html(buttons);
         
@@ -119,17 +119,47 @@ $(function() {
     
     
     $('body').on('click', '.recycle-page .btn__addrecycle', function(e) {
-        e.preventDefault();
-        var hold = $(this).closest('tr'),
-            cost = hold.find('[data-cost]').data('cost'),
-            input = '<div class="recycle-page__calc"><div class="recycle-page__title">Р?Р·РјРµРЅРёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ</div><div class="recycle-page__count"><a href="#" class="btn__recycle minus">-</a><input data-cost="' + cost + '" type="text" value="1"><a href="#" class="btn__recycle plus">+</a></div><div class="recycle-page__buttons"><a class="btn btn_mini btn_green" href="#">СЃРѕС…СЂР°РЅРёС‚СЊ</a> <a class="btn btn_mini btn_silver btn_cancel" href="#">РѕС‚РјРµРЅР°</a></div></div>',
-            buttons = '<a class="btn__hold" href="#">РћС‚Р»РѕР¶РёС‚СЊ</a><br><a href="#" class="btn__delete">РЈРґР°Р»РёС‚СЊ</a>';
-        $('.table__recycle tr:last').before(hold);
-        
-        hold.find('td:eq(1)').remove().end().find('td:eq(0)').after('<td><div class="recycle-page__cost">' + cost + ' СЂСѓР±. x</div></td><td>' + input + '</td>').end().find('td:last').removeClass('recycle-page__actions_hold').addClass('recycle-page__actions').html(buttons);
-                
-        calcCount();
-        calcRecycle();
+
+
+
+        //@todo fix ajax
+//
+//        e.preventDefault();
+//        var url = $(this).attr('href');
+//        console.log(url);
+//
+//        $.ajax({
+//            type: 'post',
+//            url: url,
+//            cached: false,
+//            success: function(t) {
+//                add2basket.modalShow();
+//                console.log(t);
+//                setTimeout(add2basket.modalHide, 1500);
+//
+//
+//                if ($(this).hasClass('btn_cancel')) {
+//                    var oldcount = parseInt($(this).closest('tr').find('input').data('oldcount'));
+//                    $(this).closest('tr').find('input').val(oldcount);
+//                    calcRecycle();
+//                }
+//                else {
+//                    $(this).closest('tr').find('input').data('oldcount', '');
+//                }
+//                $(this).closest('tr').removeClass('active');
+//            }
+//        });
+//
+//        var hold = $(this).closest('tr'),
+//            cost = hold.find('[data-cost]').data('cost'),
+//            input = '<div class="recycle-page__calc"><div class="recycle-page__title">Изменить количество</div><div class="recycle-page__count"><a href="#" class="btn__recycle minus">-</a><input data-cost="' + cost + '" type="text" value="1"><a href="#" class="btn__recycle plus">+</a></div><div class="recycle-page__buttons"><a class="btn btn_mini btn_green" href="#">сохранить</a> <a class="btn btn_mini btn_silver btn_cancel" href="#">отмена</a></div></div>',
+//            buttons = '<a class="btn__hold" href="#">Отложить</a><br><a href="#" class="btn__delete">Удалить</a>';
+//        $('.table__recycle tr:last').before(hold);
+//
+//        hold.find('td:eq(1)').remove().end().find('td:eq(0)').after('<td><div class="recycle-page__cost">' + cost + ' руб. x</div></td><td>' + input + '</td>').end().find('td:last').removeClass('recycle-page__actions_hold').addClass('recycle-page__actions').html(buttons);
+//
+//        calcCount();
+//        calcRecycle();
     });
     
     
@@ -185,7 +215,7 @@ $(function() {
             
             
         if (type == 'city') {
-            field = $('<select class="cabinet__edit_field"><option>Рі. РњРѕСЃРєРІР°</option><option>Рі. Р—РµР»РµРЅРѕРіСЂР°Рґ</option><option>Рі. РЈСЂСЋРїРёРЅСЃРє</option></select>')
+            field = $('<select class="cabinet__edit_field"><option>г. Москва</option><option>г. Зеленоград</option><option>г. Урюпинск</option></select>')
             field.find(':contains(' + data.text() + ')').prop('selected', 'selected');
         }
         else if (type == 'file') {
@@ -195,7 +225,7 @@ $(function() {
             field = $('<input class="cabinet__edit_field" type="text" value="' + data.text() + '" />');
         }
                 
-        var html = $('<div class="cabinet__edit"><form><div class="clear"><input type="submit" value="РЎРѕС…СЂР°РЅРёС‚СЊ" /><button class="fr cabinet__edit_close">РћС‚РјРµРЅР°</button></div></form></div>');//.css({'left': $(this).offset().left, 'top': $(this).offset().top})
+        var html = $('<div class="cabinet__edit"><form><div class="clear"><input type="submit" value="Сохранить" /><button class="fr cabinet__edit_close">Отмена</button></div></form></div>');//.css({'left': $(this).offset().left, 'top': $(this).offset().top})
                 
         //$('.out').append(html);
         
@@ -445,7 +475,7 @@ $(function() {
         } else if ( typeof method === 'object' || ! method ) {
             return methods.init.apply( this, arguments );
         } else {
-            $.error( 'РњРµС‚РѕРґ ' +  method + ' РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РІ jQuery.xipslider' );
+            $.error( 'Метод ' +  method + ' не существует в jQuery.xipslider' );
         }
     };    
 })(jQuery);
