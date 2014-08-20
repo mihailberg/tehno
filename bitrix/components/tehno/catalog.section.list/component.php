@@ -134,7 +134,7 @@ if(true)
 
 	//ORDER BY
 	$arSort = array(
-		"left_margin"=>"asc",
+		"SORT"=>"asc",
 	);
 	$boolPicture = empty($arSelect) || in_array('PICTURE', $arSelect);
 	//EXECUTE

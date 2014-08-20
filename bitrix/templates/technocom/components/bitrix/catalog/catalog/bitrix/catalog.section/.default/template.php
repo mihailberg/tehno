@@ -16,7 +16,7 @@ if (count($arResult["ITEMS"]) != 0) {
         </select>
 
         <select class="one">
-          <option>показать все бренды</option>
+          <option>показать все бренды3</option>
         </select>
       </a>
       <div class="d_tabproducts">
@@ -52,7 +52,7 @@ if (count($arResult["ITEMS"]) != 0) {
       </select>
 
       <select class="one">
-        <option>показать все бренды</option>
+        <option>показать все бренды4</option>
       </select>
     </a>
     <div class="d_tabproducts">

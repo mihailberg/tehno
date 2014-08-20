@@ -455,11 +455,14 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$bSectionFound = true;
 	}
 
+    //ВЫБРАЛИ РАЗДЕЛЫ ДЛЯ ПО-табного вывода
   $sections = array();
   $result = CIBlockSection::GetList(
-    array("SORT"=>"DESC"),
+    array("SORT"=>"ASC"),
     array("SECTION_ID"=>$arResult["ID"])
   );
+
+
   while ($row = $result -> Fetch()) $sections[$row["ID"]] = $row;
   $arResult["SECTIONS"] = $sections;
 
@@ -697,14 +700,17 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
   if (count($arResult["SECTIONS"]) > 0) {
     $arResult["ITEMS"] = array();
     $intKey = 0;
+      $arElementLink = array();
+      $arMeasureMap = array();
+
+      //Перебираем разделы для выбора элементов из них
     foreach ($arResult["SECTIONS"] as $arrSection) {
       $arFilter["SECTION_ID"] = $arrSection["ID"];
       $rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
       $rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
       if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
         $rsElements->SetSectionContext($arResult);
-      $arMeasureMap = array();
-      $arElementLink = array();
+
       while($arItem = $rsElements->GetNext())
       {
         $arItem['ID'] = intval($arItem['ID']);
@@ -781,6 +787,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
       }
     }
   } else {
+      //Походу нет подсекций
     $rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
     $rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
     if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
@@ -878,7 +885,14 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 			'ID' => $arResult["ELEMENTS"],
 			'IBLOCK_ID' => $arParams['IBLOCK_ID']
 		);
-		CIBlockElement::GetPropertyValuesArray($arElementLink, $arParams["IBLOCK_ID"], $arPropFilter);
+//        print_r(count($arElementLink));
+//        print_r($arResult["ELEMENTS"]);
+
+//        die();
+
+        CIBlockElement::GetPropertyValuesArray($arElementLink, $arParams["IBLOCK_ID"], $arPropFilter);
+
+//        print_r($arResult["ITEMS"]);die();
 
 		foreach ($arResult["ITEMS"] as &$arItem)
 		{
