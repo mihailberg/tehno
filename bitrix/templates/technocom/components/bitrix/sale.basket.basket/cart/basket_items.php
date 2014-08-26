@@ -30,7 +30,7 @@ if ($normalCount > 0):
 
                         $arItem["PRICE"] = (int)$arItem["PRICE"];
 
-                        var_dump($arItem);
+//                        var_dump($arItem);
 //                        print_r($arResult);
 //                        CCatalogProduct::GetById();
 //                        die();
