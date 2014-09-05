@@ -1,7 +1,8 @@
 <?
 AddEventHandler("main", "OnAfterUserRegister", Array("MyEvents", "OnAfterUserRegisterHandler"));
 AddEventHandler("catalog", "OnGetOptimalPrice", Array("MyEvents", "OnGetOptimalPrice"));
-
+/*************************************************************************************************/
+AddEventHandler("sale", "OnSaleStatusOrder", Array("MyEvents", "OnSaleStatusOrderHandler"));
 
 COption::SetOptionString("catalog", "DEFAULT_SKIP_SOURCE_CHECK", "Y" );
 COption::SetOptionString("sale", "secure_1c_exchange", "N" );
@@ -74,4 +75,19 @@ class MyEvents
         $prices = GetCatalogProductPriceList($productID);
         return array('PRICE' => $prices[$priceType]);
     }
+ 
+ /*************************************************************************************/
+    
+    //сообщения об изменении статуса заказа
+    function OnSaleStatusOrderHandler($ID, $val){ 
+ 
+        $arOldOrder = CSaleOrder::GetByID($ID);
+
+        $query = "INSERT INTO b_order_mess_status (USER_ID, SENDER, DATE, STATUS, ORDER_ID) 
+                 VALUES ('{$arOldOrder['USER_ID']}', 'Admin', '{$arOldOrder['DATE_STATUS']}', '{$arOldOrder['STATUS_ID']}', '{$arOldOrder['ID']}');"; 
+        $res = mysql_query($query) or die(mysql_error());   
+
+    }
+
+    
 }

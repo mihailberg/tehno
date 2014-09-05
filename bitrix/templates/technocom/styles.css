@@ -1665,15 +1665,11 @@ input.vik-inptxt-style__small, .vik-order-fast input.vik-inptxt-style__small{
 }
 .recycle-page__actions a {
     color: #999999;
-    /*border-bottom-color: #999999;*/
-    text-decoration: none;
-    border-bottom:0px;
+    border-bottom-color: #999999;
 }
 .recycle-page__actions_hold a {
     color: #999999;
     font-size: 28px;
-    text-decoration: none;
-    border-bottom:0px;
 }
 .recycle-page__actions_hold {
     padding: 45px 0 0 60px;
@@ -1681,9 +1677,6 @@ input.vik-inptxt-style__small, .vik-order-fast input.vik-inptxt-style__small{
 }
 .link__green {
     color: #04ab00 !important;
-
-
-
 }
 .recycle-page__count .minus, .recycle-page__count .plus {
     position: absolute;
@@ -1977,3 +1970,211 @@ tr#UF_CITY_jur li, tr#UF_CITY_jur p, tr#UF_CITY_fiz li, tr#UF_CITY_fiz p  {text-
     width:900px;
     margin-right:0px;
 }
+
+/* *************************************** */
+
+#auth_blk {
+    padding-left: 100px;
+    max-width: 1150px;
+}
+    #auth_blk .vik-order__title {
+        font-size: 54px;
+        line-height: 1em;
+        padding: 110px 0 40px 90px;
+        border: none;
+    }
+        #auth_blk .vik-order-identification_bg .vik-order__title-sm + p {
+            margin: 0;
+            padding: 15px 0;
+            line-height: 1.2;
+        }      
+            #auth_blk .vik-order__form-col label {             
+                width: 112px;
+            }
+            #auth_blk .vik-order__form-col_right {
+                width: 840px;
+            }               
+                #auth_blk .vik-forgott-pass {                   
+                    border: none;
+                }
+        #auth_blk .vik-order__form-col_btn {
+            padding-left: 158px;
+            padding-top: 86px;
+        }     
+            
+.user-photo {
+    
+}
+    .user-photo img {
+        max-width: 200px;
+    }    
+            
+.btn__edit2 {
+    border-bottom: 2px solid #666666;
+    color: #666666;
+    font-family: HelveticaNeue-Light;
+    font-size: 24px;
+    font-style: italic;
+    cursor: pointer;
+}
+.btn__edit2:hover {
+    border-bottom: 2px solid #ffa200;
+    color: #ffa200;
+}
+.cabinet__edit2 {
+    background: none repeat scroll 0 0 #f4f4f4;
+    border: 1px solid #b9b9b9;
+    color: #fff;
+    left: 0;
+    padding: 30px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    display: none;
+}   
+    .cabinet__edit2 input {
+        border: 1px solid #b9b9b9;
+        font-size: 36px;
+        height: 60px;
+        padding: 0 20px;
+        width: 500px;
+    }
+    .cabinet__edit2 input[type="submit"] {
+        background: none repeat scroll 0 0 #04ab00;
+        border: medium none;
+        color: #fff;
+        font-size: 30px;
+        height: 60px;
+        margin-top: 20px;
+        width: auto;
+    }
+    .cabinet__edit2 .btn_cancel {
+        background: none repeat scroll 0 0 #999999;
+        color: #fff;
+        font-size: 30px;
+        height: 60px;
+        margin-top: 20px;
+        padding: 0 20px;
+        cursor: pointer;
+        line-height: 60px;
+    }
+
+.ucab_company {
+    position: relative;
+    top: -25px;
+}
+
+.ucright {
+    float:left; 
+    padding-right:50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

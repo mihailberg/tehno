@@ -1,7 +1,29 @@
 (function(e){e.event.special.textchange={setup:function(t,n){e(this).data("lastValue",this.contentEditable==="true"?e(this).html():e(this).val());e(this).bind("keyup.textchange",e.event.special.textchange.handler);e(this).bind("cut.textchange paste.textchange input.textchange",e.event.special.textchange.delayedHandler)},teardown:function(t){e(this).unbind(".textchange")},handler:function(t){e.event.special.textchange.triggerIfChanged(e(this))},delayedHandler:function(t){var n=e(this);setTimeout(function(){e.event.special.textchange.triggerIfChanged(n)},25)},triggerIfChanged:function(e){var t=e[0].contentEditable==="true"?e.html():e.val();if(t!==e.data("lastValue")){e.trigger("textchange",[e.data("lastValue")]);e.data("lastValue",t)}}};e.event.special.hastext={setup:function(t,n){e(this).bind("textchange",e.event.special.hastext.handler)},teardown:function(t){e(this).unbind("textchange",e.event.special.hastext.handler)},handler:function(t,n){if(n===""&&n!==e(this).val()){e(this).trigger("hastext")}}};e.event.special.notext={setup:function(t,n){e(this).bind("textchange",e.event.special.notext.handler)},teardown:function(t){e(this).unbind("textchange",e.event.special.notext.handler)},handler:function(t,n){if(e(this).val()===""&&e(this).val()!==n){e(this).trigger("notext")}}}})(jQuery)
 
+var loc = window.location.hostname;
+
+function clickCabinetOK(){
+  var uname = $('.ucab_name .cabinet__edit_field').val();
+    var utel = $('.ucab_tel .cabinet__edit_field').val();
+    var uemail = $('.ucab_email .cabinet__edit_field').val();
+    var ucomp = $('.ucab_company .cabinet__edit_field').val();           
+    
+    $.post('http://' + loc + '/action.php',
+        {
+            name: uname,
+            tel: utel,
+            email: uemail,
+            comp: ucomp
+        },
+        function(data){                    
+        }               
+    ); 
+}
+
 $(function() {
 
+    
+    
     $(".fancybox").fancybox();
 
     $('.recycle-page input').mask("9?" + "999", { placeholder: ""})
@@ -225,7 +247,7 @@ $(function() {
             field = $('<input class="cabinet__edit_field" type="text" value="' + data.text() + '" />');
         }
                 
-        var html = $('<div class="cabinet__edit"><form><div class="clear"><input type="submit" value="Сохранить" /><button class="fr cabinet__edit_close">Отмена</button></div></form></div>');//.css({'left': $(this).offset().left, 'top': $(this).offset().top})
+        var html = $('<div class="cabinet__edit"><form onsubmit="clickCabinetOK(); return false;"><div class="clear"><input type="submit" value="Сохранить" /><button class="fr cabinet__edit_close">Отмена</button></div></form></div>');//.css({'left': $(this).offset().left, 'top': $(this).offset().top})
                 
         //$('.out').append(html);
         
@@ -259,13 +281,106 @@ $(function() {
             data.text(val);
             
             $(this).closest('.cabinet__edit').remove();      
-        }); 
+        });
+        
+        //ajax submit
+        /*$('.clear input[type="submit"]').click(function(){
+            
+            var uname = $('.ucab_name .cabinet__edit_field').val();
+            var utel = $('.ucab_tel .cabinet__edit_field').val();
+            var uemail = $('.ucab_email .cabinet__edit_field').val();
+            var ucomp = $('.ucab_company .cabinet__edit_field').val();           
+            
+            $.post('http://' + loc + '/action.php',
+                {
+                    name: uname,
+                    tel: utel,
+                    email: uemail,
+                    comp: ucomp
+                },
+                function(data){                    
+                }               
+            );
+        }); */                     
+    });
+       
+    //ajax delete message
+    $('.delete_order_mess').click(function(){
+        var umessage = $(this).siblings('.mess_id').text();
+        var cur_elm = $(this);
+        $.post('http://' + loc + '/action.php',
+            {
+                message: umessage
+            },
+            function(data){   
+                $('tr').has(cur_elm).empty();
+            }               
+        );
+    });
+    
+    $('.ucab_city input[type="submit"]').click(function(){
+        var ucity_text = $('.ucab_city .selectric .label').text();
+        var ucity_id = null;
+        $('.ucab_city .selectricHideSelect option').each(function(){
+            if (ucity_text == $(this).text()){
+                ucity_id = $(this).attr('value');
+            }
+        });
+        $.post('http://' + loc + '/action.php',
+            {
+                city: ucity_id,
+                city_name: ucity_text
+            },
+            function(data){
+                $('.ucity_data').text(ucity_text);
+            }               
+        );
     });
     
     $('body').on('click', '.x_tabs__links a', function(e) {
         e.preventDefault();
         $(this).closest('.x_tabs').find('.selected').removeClass('selected');
-        $(this).addClass('selected').closest('.x_tabs').find('.x_tabs__item:eq(' + $(this).index() + ')').addClass('selected');       
+        $(this).addClass('selected').closest('.x_tabs').find('.x_tabs__item:eq(' + $(this).index() + ')').addClass('selected');   
+        
+        //ajax change tabs
+        if($(this).text() == $('.x_tabs__links a').last().text()){
+            
+            $.ajax({
+                   type: "GET",
+                   url: '?filter_history=Y',
+                   data: '',
+                   success: function(data)
+                   {
+                        $('.Ajax_load').empty();
+                        $('.Ajax_load').append($(data).find('.Ajax_load').html());
+                   },
+                   beforeSend : function()
+                   {
+                   },
+                   error: function()
+                   {
+                
+                   }
+            });
+        }else{
+            $.ajax({
+                   type: "GET",
+                   url: '/profile',
+                   data: '',
+                   success: function(data)
+                   {
+                        $('.Ajax_load').empty();
+                        $('.Ajax_load').append($(data).find('.Ajax_load').html());
+                   },
+                   beforeSend : function()
+                   {
+                   },
+                   error: function()
+                   {
+                
+                   }
+            });
+        }    
     });
     $('.mask-tel, [name="REGISTER[PERSONAL_PHONE]"]').mask("+7 (999) 999-99-99").on('textchange', function() {
         if ($(this).val().replace(/[^0-9]/g, '').length < 11) {
