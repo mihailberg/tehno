@@ -1,6 +1,7 @@
 <?php
 
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");  
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+if($_SESSION["SESS_AUTH"]["AUTHORIZED"] == 'Y'){
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
    if($_POST['message']){
@@ -41,5 +42,4 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
        echo json_encode($rez);
        die;
     }
-
-   
+}

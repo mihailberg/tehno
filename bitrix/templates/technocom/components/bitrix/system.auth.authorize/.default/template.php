@@ -9,11 +9,11 @@ ShowMessage($arResult['ERROR_MESSAGE']);
 
 <div id="auth_blk" class="bx-auth">
 <?if($arResult["AUTH_SERVICES"]):?>
-	<div class="vik-order__title">»дентификаци€</div>
+	<div class="vik-order__title">¬ход</div>
 <?endif?>   
     <div class="vik-order-identification_bg">
     	<form class="form-validate" name="form_auth" method="post" target="_top" action="<?=$arResult["AUTH_URL"]?>">           
-            <div class="vik-order__title-sm">я уже зарегистрирован</div>
+<!--            <div class="vik-order__title-sm">я уже зарегистрирован</div>-->
             <p>
                 ¬ведите логин(совпадает с электронной почтой) и пароль,
                 <br>
@@ -50,7 +50,7 @@ ShowMessage($arResult['ERROR_MESSAGE']);
     		    <input class="vik-btn-large vik-btn-disable" type="submit" name="Login" value="<?=GetMessage("AUTH_AUTHORIZE")?>" />
                 <span class="vik-order__form-col_btn-sm">
                     или
-                    <a href="#">отменить заказ</a>
+                    <a href="/registration">зарегистрироватьс€</a>
                 </span>  
             </div>	
     				
