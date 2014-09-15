@@ -2007,6 +2007,8 @@ tr#UF_CITY_jur li, tr#UF_CITY_jur p, tr#UF_CITY_fiz li, tr#UF_CITY_fiz p  {text-
 }
     .user-photo img {
         max-width: 200px;
+        min-width: 195px;
+        height: auto;
     }    
             
 .btn__edit2 {
