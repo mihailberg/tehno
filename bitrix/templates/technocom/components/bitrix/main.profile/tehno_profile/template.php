@@ -8,63 +8,36 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	die();
 ?>
 
-
-
-<script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>
-<script type="text/javascript">
-    function SendFile() {
-    	//submit file
-    	$$f({
-    		formid:'photo_form',
-    		url:'/action.php',
-    		onstart:function () {
-    		},
-    		onsend:function () {
-    		  var loc = window.location.hostname;
-              $.post('http://' + loc + '/action.php',
-                {
-                    get_photo: true
-                },
-                function(data){
-                    $('.user-photo').html('<img src="/upload/user_profile/avatars/'+data+'" alt="" />');
-                }               
-              ); 
-    		}
-    	});
-        $$f({
-    		formid:'detail_form',
-    		url:'/action.php',
-    		onstart:function () {
-    		},
-    		onsend:function () {
-    		  var loc = window.location.hostname;
-              $.post('http://' + loc + '/action.php',
-                {
-                    get_details: true
-                },
-                function(data){
-                    $('.comp_details').html('<a href="/upload/user_profile/details/'+data+'">'+data+'</a>');
-                }               
-              );  		  
-    		}
-    	});
-    }
-    
-    
-</script>
-
+<div class="cab_upd_error">
+    <?=ShowError($arResult["strProfileError"]);?>
+</div>
 <div class="cabinet__head">
     <div class="ucright">
-        <span class="cabinet__data"><?=$arResult["arUser"]["NAME"]?></span>
+        <span class="cabinet__data cabinet__name"><?=$arResult["arUser"]["NAME"]?></span>
         <span class="ucab_name">
             <span class="cabiten__dialog">
                 <a class="btn__edit" href="#" data-type="name">изменить</a>
             </span>
         </span>
     </div>
-    <div>
+    <div class="ucity_select">
         <span>г. </span>
-        <span class="cabinet__data ucity_data"><?=$arResult["arUser"]["PERSONAL_CITY"]?></span>
+        <span class="cabinet__data ucity_data">
+               
+        <?
+            $query = "SELECT ID, NAME FROM b_iblock_element WHERE IBLOCK_ID = 27 ORDER BY NAME"; 
+            $res = mysql_query($query) or die(mysql_error());
+            $cities = array();
+            while($res1 = mysql_fetch_assoc($res)){
+                $cities[$res1['ID']] = $res1['NAME'];
+            }
+        
+            $rsUser = CUser::GetList(($by="ID"), ($order="desc"), array("ID"=>$USER->GetID()),array("SELECT"=>array("UF_CITY")));
+            $arUser=$rsUser->Fetch();
+            echo $cities[$arUser[UF_CITY]];
+        ?>
+        
+        </span>
         <span class="ucab_city">
 
             <span class="cabiten__dialog">
@@ -72,12 +45,8 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
                 <div class="cabinet__edit2">                   
                     <select class="cabinet__edit_field">
                         <?
-                            $query = "SELECT ID, NAME FROM b_iblock_element WHERE IBLOCK_ID = 27 ORDER BY NAME"; 
-                            $res = mysql_query($query) or die(mysql_error());
-                            while($res1 = mysql_fetch_array($res)){
-                                echo '<option value="'.$res1[0].'"';
-                                if ($city_id != null && $city_id==$res[0]) echo ' selected';
-                                echo'>'.$res1[1].'</option>';
+                            foreach ($cities as $id => $city) {
+                                echo '<option value="'.$id.'" '.(($arUser[UF_CITY] == $id)?'selected':'').'>'.$city.'</option>';
                             }
                         ?>
                     </select>                                               
@@ -94,37 +63,39 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 <div class="cabinet-user clearfix">
     <div class="cabinet-user__left">
         <div class="user-photo">    
-            <?
-                $query = "SELECT FILE_NAME FROM b_user INNER JOIN b_file ON b_user.PERSONAL_PHOTO=b_file.ID WHERE b_user.ID = {$_SESSION['SESS_AUTH']['USER_ID']}"; 
-                $res = mysql_query($query) or die(mysql_error());
-                $res1 = mysql_fetch_array($res);
-            ?>
-            <img src="/upload/user_profile/avatars/<?=$res1[0];?>" alt="" />
-
+            <?=$arResult["arUser"]["PERSONAL_PHOTO_HTML"]?>                 
         </div>
+
         <div class="ucab_photo">
             <div class="cabiten__dialog">
                 <a class="btn__edit2" onclick="$(this).siblings('.cabinet__edit2').toggle()">изменить фото</a>
                 <div class="cabinet__edit2">
-                    <form id="photo_form" enctype="multipart/form-data" method="post">
-                        <input type="file" name="photo"/>                                               
-                        <div class="clear">
-                            <input type="submit" value="Сохранить" onclick="SendFile(); $('.cabinet__edit2').has(this).hide()" />                                                       
+
+                    <form method="post" id="photo_form" name="form1" action="<?=$arResult["FORM_TARGET"]?>" enctype="multipart/form-data">
+                        <?=$arResult["BX_SESSION_CHECK"]?>
+                        <input type="hidden" name="lang" value="<?=LANG?>" />
+                        <input type="hidden" name="ID" value=<?=$arResult["ID"]?> />
+                        <input type="hidden" name="LOGIN" maxlength="50" value="<? echo $arResult["arUser"]["LOGIN"]?>" />
+                        <input type="hidden" name="EMAIL" maxlength="50" value="<? echo $arResult["arUser"]["EMAIL"]?>" />
+                        
+                        <?=$arResult["arUser"]["PERSONAL_PHOTO_INPUT"]?>
+                		<div class="clear">
+                            <input type="submit" name="save" value="<?=(($arResult["ID"]>0) ? GetMessage("MAIN_SAVE") : GetMessage("MAIN_ADD"))?>" onclick="$('.cabinet__edit2').has(this).hide()" />
                             <div class="fr btn_cancel" onclick="$('.cabinet__edit2').has(this).hide()">Отмена</div>
                         </div>
                     </form>
+
                 </div>                                   
             </div>
         </div>
     </div>
     <div class="cabinet-user__right clearfix">
         
-        
         <div class="cabinet-user__block">
             <div class="cabinet-user__block_title">Ваши контакты:</div>
             <div class="ucab_tel">
                 Тел.:
-                <span class="cabinet__data"><?=$arResult["arUser"]["PERSONAL_PHONE"]?></span>
+                <span class="cabinet__data"><? echo $arResult["arUser"]["PERSONAL_PHONE"]?></span>
                 <span class="cabiten__dialog fr">
                     <a class="btn__edit" href="#" data-type="tel">изменить</a>
                 </span>
@@ -154,20 +125,31 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
                         $res = mysql_query($query) or die(mysql_error());
                         $res1 = mysql_fetch_array($res);
                     ?>
-                    <a href="/upload/user_profile/details/<?=$res1[0]?>"><?=$res1[0]?></a>    
+                    <a href="<?=CFile::GetPath($arResult["arUser"]["UF_DETAILS"]);?>"><?$matches = array(); preg_match('/\/([^\/]*)$/i', CFile::GetPath($arResult["arUser"]["UF_DETAILS"]), $matches); echo($matches[1]);?></a>    
                 </span>         
             </div>
             <div class="ucab_details">
                 <span class="cabiten__dialog">
                     <a class="btn__edit2" onclick="$(this).siblings('.cabinet__edit2').toggle()">загрузить новые реквизиты</a>
                     <div class="cabinet__edit2">
-                        <form id="detail_form" enctype="multipart/form-data" method="post">
-                            <input type="file" name="detail"/>
-                            <div class="clear">
-                                <input type="submit" value="Сохранить" onclick="SendFile(); $('.cabinet__edit2').has(this).hide()" />
+                        
+                        
+                        <form method="post" id="detail_form" name="form2" action="<?=$arResult["FORM_TARGET"]?>" enctype="multipart/form-data">
+                            <?=$arResult["BX_SESSION_CHECK"]?>
+                            <input type="hidden" name="lang" value="<?=LANG?>" />
+                            <input type="hidden" name="ID" value=<?=$arResult["ID"]?> />
+                            
+                            <input type="hidden" name="LOGIN" maxlength="50" value="<? echo $arResult["arUser"]["LOGIN"]?>" />
+                            <input type="hidden" name="EMAIL" maxlength="50" value="<? echo $arResult["arUser"]["EMAIL"]?>" />
+                            
+                            <input class="typefile" type="file" size="20" name="UF_DETAILS" />
+                    		<div class="clear">
+                                <input type="submit" name="save" value="<?=(($arResult["ID"]>0) ? GetMessage("MAIN_SAVE") : GetMessage("MAIN_ADD"))?>" onclick="$('.cabinet__edit2').has(this).hide()" />
                                 <div class="fr btn_cancel" onclick="$('.cabinet__edit2').has(this).hide()">Отмена</div>
                             </div>
                         </form>
+                        
+
                     </div>
                 </span>
             </div>

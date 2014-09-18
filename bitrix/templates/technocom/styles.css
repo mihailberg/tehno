@@ -2010,6 +2010,8 @@ tr#UF_CITY_jur li, tr#UF_CITY_jur p, tr#UF_CITY_fiz li, tr#UF_CITY_fiz p  {text-
 }
     .user-photo img {
         max-width: 200px;
+        min-width: 195px;
+        height: auto;
     }    
             
 .btn__edit2 {
@@ -2070,17 +2072,28 @@ tr#UF_CITY_jur li, tr#UF_CITY_jur p, tr#UF_CITY_fiz li, tr#UF_CITY_fiz p  {text-
 .ucright {
     float:left; 
     padding-right:50px;
+    margin-top: -10px;
 }
 
+.ucity_select {
+    padding-top: 8px;
+}
 
+.cab_upd_error p {
+    color: red;
+}
 
+.bx-input-file-desc {
+    display: none;
+}   
 
+.user-photo > a {
+    border: medium none;
+}
 
-
-
-
-
-
+.ucab_photo .btn__edit2 {
+    font-style: normal;
+}
 
 
 

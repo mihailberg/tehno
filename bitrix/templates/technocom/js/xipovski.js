@@ -3,7 +3,7 @@
 var loc = window.location.hostname;
 
 function clickCabinetOK(){
-  var uname = $('.ucab_name .cabinet__edit_field').val();
+    var uname = $('.ucab_name .cabinet__edit_field').val();
     var utel = $('.ucab_tel .cabinet__edit_field').val();
     var uemail = $('.ucab_email .cabinet__edit_field').val();
     var ucomp = $('.ucab_company .cabinet__edit_field').val();           
@@ -15,7 +15,22 @@ function clickCabinetOK(){
             email: uemail,
             comp: ucomp
         },
-        function(data){                    
+        function(data){
+            var rez = [];
+            try{
+                rez = JSON.parse(data);
+            }
+            catch(variable){}
+            
+            if (typeof(rez.status) != 'undefined') {
+                if(rez.status == 'ERROR') {
+                    for(var i = 0; i<rez.error.length; i++){
+                        $('.cab_upd_error').html('<p>Поле не сохранено!</p>');
+                    }
+                }else{
+                    $('.cab_upd_error').empty();
+                }
+            }
         }               
     ); 
 }
@@ -277,31 +292,16 @@ $(function() {
                     $(this).find('input').addClass('error');
                     return false;
                 }
-            }  
-            data.text(val);
+            }
             
+            var name_value = $('.ucab_name .cabinet__edit_field').val();
+            $('.user__link.user__link_company span').text(name_value);
+              
+            data.text(val);
+
             $(this).closest('.cabinet__edit').remove();      
         });
-        
-        //ajax submit
-        /*$('.clear input[type="submit"]').click(function(){
-            
-            var uname = $('.ucab_name .cabinet__edit_field').val();
-            var utel = $('.ucab_tel .cabinet__edit_field').val();
-            var uemail = $('.ucab_email .cabinet__edit_field').val();
-            var ucomp = $('.ucab_company .cabinet__edit_field').val();           
-            
-            $.post('http://' + loc + '/action.php',
-                {
-                    name: uname,
-                    tel: utel,
-                    email: uemail,
-                    comp: ucomp
-                },
-                function(data){                    
-                }               
-            );
-        }); */                     
+                           
     });
        
     //ajax delete message
@@ -317,6 +317,7 @@ $(function() {
             }               
         );
     });
+
     
     $('.ucab_city input[type="submit"]').click(function(){
         var ucity_text = $('.ucab_city .selectric .label').text();
@@ -340,47 +341,7 @@ $(function() {
     $('body').on('click', '.x_tabs__links a', function(e) {
         e.preventDefault();
         $(this).closest('.x_tabs').find('.selected').removeClass('selected');
-        $(this).addClass('selected').closest('.x_tabs').find('.x_tabs__item:eq(' + $(this).index() + ')').addClass('selected');   
-        
-        //ajax change tabs
-        if($(this).text() == $('.x_tabs__links a').last().text()){
-            
-            $.ajax({
-                   type: "GET",
-                   url: '?filter_history=Y',
-                   data: '',
-                   success: function(data)
-                   {
-                        $('.Ajax_load').empty();
-                        $('.Ajax_load').append($(data).find('.Ajax_load').html());
-                   },
-                   beforeSend : function()
-                   {
-                   },
-                   error: function()
-                   {
-                
-                   }
-            });
-        }else{
-            $.ajax({
-                   type: "GET",
-                   url: '/profile',
-                   data: '',
-                   success: function(data)
-                   {
-                        $('.Ajax_load').empty();
-                        $('.Ajax_load').append($(data).find('.Ajax_load').html());
-                   },
-                   beforeSend : function()
-                   {
-                   },
-                   error: function()
-                   {
-                
-                   }
-            });
-        }    
+        $(this).addClass('selected').closest('.x_tabs').find('.x_tabs__item:eq(' + $(this).index() + ')').addClass('selected');     
     });
     $('.mask-tel, [name="REGISTER[PERSONAL_PHONE]"]').mask("+7 (999) 999-99-99").on('textchange', function() {
         if ($(this).val().replace(/[^0-9]/g, '').length < 11) {
@@ -594,4 +555,6 @@ $(function() {
         }
     };    
 })(jQuery);
+
+
 

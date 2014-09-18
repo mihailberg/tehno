@@ -50,7 +50,7 @@
                     false
                 );?>
                 <a class="user__link user__link_mail" href="/profile"><span>Сообщения</span> (4)</a>
-                <a class="user__link user__link_grey" href="/logout"><span>Выход</span></a>
+                <a class="user__link user__link_grey" href="/profile/?logout=yes"><span>Выход</span></a>
             </div>
             <div class="user__row">
                 <a class="user__link user__link_grey user__link_pad" href="/cart#delayed"><span>Отложено</span> (4)</a>
