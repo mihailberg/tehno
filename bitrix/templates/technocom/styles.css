@@ -41,6 +41,9 @@ a:hover { text-decoration: none; border-bottom: 2px solid #ffa200;}
 
 .out { margin: 0 auto; width: 2560px; }
 
+.loader { width: 80px !important; height: 80px !important; margin: 40px auto; background: url('./img/loader.gif') no-repeat 50% 50%; background-size: cover; display: none; }
+.no-result { margin-bottom: 120px; color: #f00; }
+
 .header { position: relative; padding: 70px 85px 6px 95px; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; *zoom: 1; z-index: 21;}
 .header:after { content: " "; display: table; clear: both; }
 .header .logo { float: left; display: block; background: url('./img/icons-sb72f7dbf1b.png') 0 -480px no-repeat; width: 590px; height: 75px; border-bottom: none;}

@@ -44,4 +44,47 @@ function getCity() {
     return $city;
 }
 //echo getCity();die();
+
+function c_encode($txt) {
+  return strtr($txt, array(
+      "\\" => "\\\\",
+      "\n" => "\\n",
+      "\r" => "\\r",
+      "\t" => "\\t",
+      '\'' => '\\\'',
+      "\"" => "\\\"")
+  );
+}
+function php_c_encode($txt) {
+  return strtr($txt, array(
+      "\\" => "\\\\",
+      "\n" => "\\n",
+      "\r" => "\\r",
+      "\t" => "\\t",
+      '\$' => '\\\$',
+      "\"" => "\\\"")
+  );
+}
+function json_encode_obj($arr) {
+  $res = array();
+  $i = 0;
+  foreach ($arr as $k => $v) $res[$i++] = "\"" . c_encode($k) . "\":" . my_json_encode($v);
+  return "{" . join(",", $res) . "}";
+}
+function json_encode_array($arr) {
+  $cnt = count($arr);
+  $res = array();
+  for ($i = 0; $i < $cnt; $i++) $res[$i] = my_json_encode($arr[$i]);
+  return "[" . join(",", $res) . "]";
+}
+function my_json_encode($val) {
+  if (is_array($val)) {
+    if (!count($val) || isset($val[0])) return json_encode_array($val);
+    else return json_encode_obj($val);
+  }
+  if (is_bool($val)) return $val ? "true" : "false";
+  if (is_int($val) || is_float($val)) return strval($val);
+  return "\"" . c_encode(strval($val)) . "\"";
+}
+
 ?>

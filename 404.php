@@ -10,10 +10,12 @@ $APPLICATION->SetTitle("Ошибка 404");
   <div class="title-not">Такой страницы не существует <br/>или она была удалена</div>
   <div class="info_search">Воспользуйтесь поиском или выберете интересующий раздел.</div>
   <div class="catalog__top">
-    <div class="catalog__search">
-      <input type="text" class="input" placeholder="Введите название или код товара">
-    </div>
-    <button class="btn">Найти</button>
+    <form method="get" action="/search/">
+      <div class="catalog__search">
+          <input type="text" class="input" placeholder="Введите название или код товара" name="q">
+      </div>
+      <button class="btn" type="submit">Найти</button>
+    </form>
   </div>
   <!-- BEGIN footer -->
   <footer class="footer not_found">

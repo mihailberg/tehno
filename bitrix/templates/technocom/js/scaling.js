@@ -118,4 +118,7 @@ $( document ).ready(function() {
 		}, 500);
 	}
 
+  // Don't delete.
+  catalog.init();
+
 });

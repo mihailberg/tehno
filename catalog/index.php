@@ -11,8 +11,8 @@ else $sectionViewMode = "TEXT";
     <p>Объединяем лучшее!</p>
     <span>Техноком — крупный дистрибьютор известных зарубежных и отечественных брендов в области пневматики и гидравлики. Основным направлением деятельности является поставка запасных частей и расходных материалов для лесозаготовительной и дорожно-строительной техники.</span>
     <div>
-      <a href="#" title="" class="d_sertificat">Сертификаты</a>
-      <a href="#" title="" class="d_discount">Товары со скидкой</a>
+      <a href="#" class="d_sertificat">Сертификаты</a>
+      <a href="/sales/" class="d_discount">Товары со скидкой</a>
     </div>
   </div>
 <?else:?>
@@ -105,10 +105,10 @@ else $sectionViewMode = "TEXT";
     "SECTIONS_SHOW_PARENT_NAME" => "Y",	// Показывать название раздела
     "PAGE_ELEMENT_COUNT" => "8",	// Количество элементов на странице
     "LINE_ELEMENT_COUNT" => "4",	// Количество элементов, выводимых в одной строке таблицы
-    "ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем товары в разделе
+    "ELEMENT_SORT_FIELD" => "catalog_PRICE_7",	// По какому полю сортируем товары в разделе
     "ELEMENT_SORT_ORDER" => "asc",	// Порядок сортировки товаров в разделе
-    "ELEMENT_SORT_FIELD2" => "id",	// Поле для второй сортировки товаров в разделе
-    "ELEMENT_SORT_ORDER2" => "desc",	// Порядок второй сортировки товаров в разделе
+    "ELEMENT_SORT_FIELD2" => "",	// Поле для второй сортировки товаров в разделе
+    "ELEMENT_SORT_ORDER2" => "",	// Порядок второй сортировки товаров в разделе
     "LIST_PROPERTY_CODE" => array(	// Свойства
       1 => "ARTICLE",
       2 => "PRODUCTION",
@@ -224,6 +224,7 @@ else $sectionViewMode = "TEXT";
       "section" => "#SECTION_CODE#/",
       "element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
       "compare" => "",
+      "search" => "search/"
     )
   ),
   false

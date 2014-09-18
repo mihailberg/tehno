@@ -402,4 +402,5 @@ if (!empty($arResult['ITEMS']))
   $arResult['SKU_PROPS'] = $arSKUPropList;
   $arResult['DEFAULT_PICTURE'] = $arEmptyPreview;
 }
+
 ?>

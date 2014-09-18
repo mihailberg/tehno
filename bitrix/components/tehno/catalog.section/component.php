@@ -697,7 +697,8 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arCurrencyList = array();
 	$arSections = array();
 
-  if (count($arResult["SECTIONS"]) > 0) {
+  if (count($arResult["SECTIONS"]) > 0 && !isset($arParams["SALES"]) && !isset($arParams["PRODUCTIONS"])) {
+
     $arResult["ITEMS"] = array();
     $intKey = 0;
       $arElementLink = array();
@@ -706,13 +707,16 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
       //Перебираем разделы для выбора элементов из них
     foreach ($arResult["SECTIONS"] as $arrSection) {
       $arFilter["SECTION_ID"] = $arrSection["ID"];
+
       $rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
+
       $rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
       if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
         $rsElements->SetSectionContext($arResult);
 
       while($arItem = $rsElements->GetNext())
       {
+
         $arItem['ID'] = intval($arItem['ID']);
 
         $arItem['ACTIVE_FROM'] = $arItem['DATE_ACTIVE_FROM'];
@@ -787,7 +791,11 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
       }
     }
   } else {
+
       //Походу нет подсекций
+    unset($arFilter["SECTION_ID"]);
+    if (isset($arParams["SALES"])) $arFilter["PROPERTY_SALE_VALUE"] = 1;
+
     $rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
     $rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
     if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
@@ -796,9 +804,32 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
     $arMeasureMap = array();
     $arElementLink = array();
     $intKey = 0;
+
+    $sArOrder = array();
+    $sArFilter = array("ACTIVE" => "Y", "IBLOCK_ID" => 13, "ID" => $id);
+    $sBIncCnt = false;
+    $sSelect = array();
+    $sNavStartParams = false;
+
+    $rsSections = CIBlockSection::GetList(
+      $sArOrder,
+      $sArFilter,
+      $sBIncCnt,
+      $sSelect,
+      $sNavStartParams
+    );
+
+    $arrSections = array();
+    while ($row = $rsSections -> Fetch()) $arrSections[$row["ID"]] = $row;
+
     while($arItem = $rsElements->GetNext())
     {
       $arItem['ID'] = intval($arItem['ID']);
+
+      // Detail url for products with sales
+      if ((isset($arParams["SALES"]) && $arParams["SALES"] == "Y") || (isset($arParams["PRODUCTIONS"]) && $arParams["PRODUCTIONS"] == "Y")) {
+        $arItem["DETAIL_PAGE_URL"] = "/catalog/" . $arrSections[$arItem["IBLOCK_SECTION_ID"]]["CODE"] . "/" . $arItem["CODE"] . "/";
+      }
 
       $arItem['ACTIVE_FROM'] = $arItem['DATE_ACTIVE_FROM'];
       $arItem['ACTIVE_TO'] = $arItem['DATE_ACTIVE_TO'];
