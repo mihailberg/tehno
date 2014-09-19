@@ -97,6 +97,8 @@ var catalog = {
   priceFilter: [],
   productionFilter: [],
   sales: 0,
+  search: 0,
+  q: '',
   id: 0,
   zoom: 1,
   height: 0,
@@ -112,6 +114,7 @@ var catalog = {
       catalog.productionFilter[id] = 0;
     });
     if ($('[name=sales]').length) this.sales = 1;
+    if ($('[name=search]').length) this.search = 1;
     this.setId();
     this.setZoom();
     this.setElHeight();
@@ -170,6 +173,7 @@ var catalog = {
   },
 
   loadMore: function() {
+    if (this.search) this.q = $('[name=q]').val();
     this.loading[this.id] = true;
     this.showLoader();
     this.pages[this.id]++;
@@ -184,10 +188,15 @@ var catalog = {
         id: catalog.id,
         priceFilter: catalog.priceFilter[catalog.id],
         productionFilter: catalog.productionFilter[catalog.id],
-        sales: catalog.sales
+        sales: catalog.sales,
+        search: catalog.search,
+        q: catalog.q
       },
       success: function(response) {
-        if (response != '') {
+        if (response == 'noFound' && catalog.pages[catalog.id] == 1) {
+          var str = '<span class="no-result mt">“оваров с выбранным производителем не найдено!</span>';
+          catalog.addToSection(str);
+        } else if (response != '') {
           var json = JSON.parse(response), str = '';
           for (var i = 0; i < json.length; i++) str += catalog.printNew(json[i]['URL'], json[i]['PREVIEW_PICTURE'], json[i]['NAME'], json[i]['PROPERTY_ARTICLE_VALUE'], json[i]['PRICE'], json[i]['ADD_URL']);
           catalog.addToSection(str);

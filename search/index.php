@@ -1,8 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Поиск");?>
+  <div class="d_space"></div>
+  <div class="title-line"><span>Поиск</span></div>
 <?$APPLICATION->IncludeComponent(
-	"bitrix:search.page", 
+	"tehno:search.page",
 	".default", 
 	array(
 		"TAGS_SORT" => "NAME",
@@ -18,14 +20,14 @@ $APPLICATION->SetTitle("Поиск");?>
 		"SHOW_CHAIN" => "Y",
 		"COLOR_TYPE" => "Y",
 		"WIDTH" => "100%",
-		"USE_SUGGEST" => "Y",
+		"USE_SUGGEST" => "N",
 		"SHOW_RATING" => "Y",
 		"PATH_TO_USER_PROFILE" => "",
 		"AJAX_MODE" => "N",
 		"RESTART" => "Y",
 		"NO_WORD_LOGIC" => "N",
-		"USE_LANGUAGE_GUESS" => "N",
-		"CHECK_DATES" => "N",
+		"USE_LANGUAGE_GUESS" => "Y",
+		"CHECK_DATES" => "Y",
 		"USE_TITLE_RANK" => "Y",
 		"DEFAULT_SORT" => "rank",
 		"FILTER_NAME" => "",
@@ -35,15 +37,15 @@ $APPLICATION->SetTitle("Поиск");?>
 		"SHOW_WHERE" => "N",
 		"arrWHERE" => "",
 		"SHOW_WHEN" => "N",
-		"PAGE_RESULT_COUNT" => "50",
+		"PAGE_RESULT_COUNT" => "8",
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "3600",
-		"DISPLAY_TOP_PAGER" => "Y",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
 		"PAGER_TITLE" => "Результаты поиска",
-		"PAGER_SHOW_ALWAYS" => "Y",
+		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "",
-		"AJAX_OPTION_SHADOW" => "N",
+		"AJAX_OPTION_SHADOW" => "Y",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "N",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -55,33 +57,4 @@ $APPLICATION->SetTitle("Поиск");?>
 	),
 	false
 );?>
-<?
-$q = isset($_REQUEST["q"]) ? $_REQUEST["q"] : "";
-if (!empty($q)) {
-  $result = CIBlockElement::GetList(
-    array(),
-    array("IBLOCK_ID" => 13, "NAME" => "%" . $q)
-  );
-  $products = array();
-  while ($row = $result -> Fetch()) $products[] = $row;
-  echo "<pre>";
-  print_r($products);
-  exit;
-}
-?>
-  <div class="d_space"></div>
-  <div class="title-line"><span>Поиск</span></div>
-  <div class="page_not">
-    <div class="catalog__top">
-      <form method="get" action="/search/">
-        <div class="catalog__search">
-          <input type="text" class="input" placeholder="Введите название или код товара" name="q">
-        </div>
-        <button class="btn" type="submit">Найти</button>
-      </form>
-    </div>
-    <?if(isset($_REQUEST["q"]) && empty($q)):?>
-      <div class="no-result">Введите название или код товара</div>
-    <?endif;?>
-  </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -98,10 +98,12 @@
             <a href="/catalog/" class="catalog__anchor">Каталог товаров</a>
             <div class="catalog__block">
                 <div class="catalog__top">
+                  <form method="get" action="/search/">
                     <div class="catalog__search">
-                        <input type="text" class="input" placeholder="Введите название или код товара">
+                      <input type="text" class="input" placeholder="Введите название или код товара" name="q" value="<?=$arResult["REQUEST"]["QUERY"]?>">
                     </div>
-                    <button class="btn">Найти</button>
+                    <button class="btn" type="submit">Найти</button>
+                  </form>
                 </div>
                 <div class="catalog__bottom">
                     <?$APPLICATION->IncludeComponent("bitrix:menu","header-catalog",Array(

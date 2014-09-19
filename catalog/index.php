@@ -224,7 +224,7 @@ else $sectionViewMode = "TEXT";
       "section" => "#SECTION_CODE#/",
       "element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
       "compare" => "",
-      "search" => "search/"
+      "search" => ""
     )
   ),
   false
