@@ -35,7 +35,7 @@ if ($cache_time > 0 &&
          data-cycle-slides=".brands__item"
          data-cycle-carousel-visible="4">
 <?foreach($partners as $partner):?>
-      <div class="brands__item"><a href="<?=$partner["CODE"];?>"><img src="<?=CFile::GetPath($partner["PREVIEW_PICTURE"]);?>" alt="<?=$partner["NAME"];?>"></a></div>
+      <div class="brands__item"><a href="/productions/?prod=<?=$partner["ID"];?>"><img src="<?=CFile::GetPath($partner["PREVIEW_PICTURE"]);?>" alt="<?=$partner["NAME"];?>"></a></div>
 <?endforeach;?>
     </div>
     <button class="brands__prev"></button>

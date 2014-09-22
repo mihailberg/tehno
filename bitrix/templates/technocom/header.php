@@ -23,8 +23,9 @@
         <div class="header__right user">
 
             <? if($USER->IsAuthorized()):?>
+              <?$res = $USER -> GetByID($USER -> GetID()); $usr = $res -> Fetch();?>
             <div class="user__row">
-                <a class="user__link user__link_company" href="/profile"> <span> <?=$USER->GetFullName()?> </span> </a>
+                <a class="user__link user__link_company" href="/profile/"> <span> <?if($usr["UF_LEGAL"]){ echo $usr["WORK_COMPANY"]; }else{ echo $usr["NAME"]; };?> </span> </a>
             </div>
             <div class="user__row user__row_mod">
                 <?$APPLICATION->IncludeComponent(
@@ -93,7 +94,7 @@
         </div>
 
     </div>
-    <div class="menu">
+    <div class="menu<?if($APPLICATION -> GetCurPage() == "/")echo " main";?>">
         <div class="catalog">
             <a href="/catalog/" class="catalog__anchor">Каталог товаров</a>
             <div class="catalog__block">

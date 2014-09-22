@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Товары по производителям");
+if (isset($_REQUEST["prod"]))
+  $arrFilter = array("PROPERTY_PRODUCTION" => (int)$_REQUEST["prod"]);
 ?><div class="d_space">
 </div>
 <div class="title-line">

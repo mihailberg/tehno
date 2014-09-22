@@ -13,6 +13,7 @@ if (count($arResult["ITEMS"]) != 0) {
     if ($i == 1) echo "<div class=\"js-section active\" data-id=\"#t" .$arSection["ID"]. "\">";
     else echo "<div class=\"js-section\" style=\"display: none;\" data-id=\"#t" .$arSection["ID"]. "\">";
     if (isset($arParams["SALES"])) echo "<input type=\"hidden\" name=\"sales\" value=\"1\">";
+    if (isset($arParams["PRODUCTIONS"])) echo "<input type=\"hidden\" name=\"productions\" value=\"1\">";
     ?>
     <a name="t<?=$arSection["ID"]?>" id="t<?=$arSection["ID"]?>" class="d_sort">
       Сортировать по

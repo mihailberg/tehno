@@ -30,7 +30,7 @@ var section = {
 
 };
 
-section.init();
+if ($('.js-section').length) section.init();
 
 var add2basket = {
 
@@ -97,6 +97,7 @@ var catalog = {
   priceFilter: [],
   productionFilter: [],
   sales: 0,
+  productions: 0,
   search: 0,
   q: '',
   id: 0,
@@ -114,7 +115,9 @@ var catalog = {
       catalog.productionFilter[id] = 0;
     });
     if ($('[name=sales]').length) this.sales = 1;
+    if ($('[name=productions]').length) this.productions = 1;
     if ($('[name=search]').length) this.search = 1;
+    if (this.productions) this.productionFilter[0] = $('select.jsd-productionFilter').val();
     this.setId();
     this.setZoom();
     this.setElHeight();
@@ -264,3 +267,27 @@ if ($('.page_not').length) {
   $('.d_tabs').removeClass('d_tabs');
   $('.domtab').removeClass('domtab');
 }
+
+var basketPostponed = {
+
+  opts: {
+    tabs: '.x_tabs__links a'
+  },
+
+  tabs: {},
+
+  init: function() {
+    this.tabs = $(this.opts.tabs);
+    if (!this.tabs.length) return;
+  },
+
+  showPostponed: function() {
+    $(this.opts.tabs + ':eq(0)').removeClass('selected');
+    $(this.opts.tabs + ':eq(1)').addClass('selected');
+  }
+
+};
+
+$(function() {
+  basketPostponed.init();
+});

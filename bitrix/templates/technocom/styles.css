@@ -96,6 +96,7 @@ a:hover { text-decoration: none; border-bottom: 2px solid #ffa200;}
 
 
 .menu { position: relative; padding: 0 0 0 98px; -webkit-box-shadow: 0 23px 35px rgba(0, 0, 1, 0.35); -moz-box-shadow: 0 43px 35px rgba(0, 0, 1, 0.35); box-shadow: 0 43px 35px rgba(0, 0, 1, 0.35); -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; *zoom: 1; z-index: 20; }
+.menu.main { -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0); -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
 .menu:after { content: " "; display: table; clear: both; }
 
 .menu .catalog { float: left; position: relative; padding: 0 80px; line-height: 106px; color: white; font-size: 48px; text-decoration: none; cursor: pointer; background: url('./img/icons-sb72f7dbf1b.png') 0 -1880px no-repeat; width: 590px; height: 106px; box-sizing: border-box;}

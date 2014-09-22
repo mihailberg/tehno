@@ -112,11 +112,13 @@ $( document ).ready(function() {
         }
 	});
 
-	if (tmpAnchor !== '') {
+	if (tmpAnchor !== '' && tmpAnchor !== '#delayed') {
 		$('html, body').animate({
 			scrollTop: $(tmpAnchor).offset().top
 		}, 500);
-	}
+	} else if (tmpAnchor == '#delayed') {
+    basketPostponed.showPostponed();
+  }
 
   // Don't delete.
   if ($('.js-section').length) catalog.init();

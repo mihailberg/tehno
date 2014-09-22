@@ -11,6 +11,11 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-foreach ($arResult["ITEMS"][21]["VALUES"] as $key => $val)
-  echo "<option value=\"$key\">{$val["VALUE"]}</option>";
+$prod = 0;
+if (isset($_REQUEST["prod"])) $prod = (int)$_REQUEST["prod"];
+foreach ($arResult["ITEMS"][21]["VALUES"] as $key => $val) {
+  echo "<option value=\"$key\"";
+  if ($key == $prod) echo " selected";
+  echo ">{$val["VALUE"]}</option>";
+}
 ?>
