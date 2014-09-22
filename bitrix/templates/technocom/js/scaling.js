@@ -119,6 +119,6 @@ $( document ).ready(function() {
 	}
 
   // Don't delete.
-  catalog.init();
+  if ($('.js-section').length) catalog.init();
 
 });

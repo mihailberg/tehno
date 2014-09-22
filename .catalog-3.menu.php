@@ -1,64 +1,76 @@
 <?
 $aMenuLinks = Array(
   Array(
-    "Навесное оборудование для комунальной техники",
-    "",
+    "Навесное оборудование",
+    "/catalog/navesnoe-oborudovanie/",
     Array(),
     Array()
   ),
   Array(
-    "Износостойкая сталь",
-    "",
+    "Масло и смазки",
+    "/catalog/maslo-i-smazki/",
     Array(),
     Array()
   ),
   Array(
-    "Фары и лампы",
-    "",
+    "Промышленные шланги",
+    "/catalog/promyshlennye-shlangi/",
     Array(),
     Array()
   ),
   Array(
-    "Шины колесные",
-    "",
+    "Станки для сборк РВД",
+    "/catalog/stanki-dlya-sbork-rvd/",
     Array(),
     Array()
   ),
   Array(
-    "Цепи противоскольжения",
-    "",
+    "Защитные спирали",
+    "/catalog/zashchitnye-spirali/",
     Array(),
     Array()
   ),
   Array(
-    "Гусеницы и моногусеницы",
-    "",
+    "Аккумуляторы давления",
+    "/catalog/akkumulyatory-davleniya/",
     Array(),
     Array()
   ),
   Array(
-    "Заготовки штоков и гильз",
-    "",
+    "Манометры",
+    "/catalog/manometry/",
     Array(),
     Array()
   ),
   Array(
-    "Насосы и моторы",
-    "",
+    "Быстроразъемные соединения (БРС)",
+    "/catalog/bystrorazemnye-soedineniya-brs/",
     Array(),
     Array()
   ),
   Array(
-    "Уплотнения",
-    "",
+    "Арматура",
+    "/catalog/armatura/",
     Array(),
     Array()
   ),
   Array(
-    "Подшипники",
-    "",
+    "Адаптеры",
+    "/catalog/adaptery/",
     Array(),
     Array()
   ),
+  Array(
+    "Фланцевые адаптеры",
+    "/catalog/flantsevye-adaptery/",
+    Array(),
+    Array()
+  ),
+  Array(
+    "Фильтры",
+    "/catalog/filtry/",
+    Array(),
+    Array()
+  )
 );
 ?>

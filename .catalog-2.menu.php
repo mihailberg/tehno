@@ -1,62 +1,74 @@
 <?
 $aMenuLinks = Array(
   Array(
-    "Гидравлические РВД",
-    "",
+    "Подвески",
+    "/catalog/podveski/",
     Array(),
     Array()
   ),
   Array(
-    "Промышленные шланги",
-    "",
+    "Распределители",
+    "/catalog/raspredeliteli/",
     Array(),
     Array()
   ),
   Array(
-    "Станки для сборки РВД",
-    "",
+    "Насосы и моторы",
+    "/catalog/nasosy-i-motory/",
     Array(),
     Array()
   ),
   Array(
-    "Защитные спирали",
-    "",
+    "Фары",
+    "/catalog/fary/",
     Array(),
     Array()
   ),
   Array(
-    "Адаптеры",
-    "",
+    "Грейферы",
+    "/catalog/greyfery/",
     Array(),
     Array()
   ),
   Array(
-    "Арматура (муфты и фитинги)",
-    "",
+    "Шины и камеры",
+    "/catalog/shiny-i-kamery/",
     Array(),
     Array()
   ),
   Array(
-    "Трубные соединения и крепеж",
-    "",
+    "Цепи противоскольжения для грузовых авто",
+    "/catalog/tsepi-protivoskolzheniya-dlya-gruzovykh-avto/",
     Array(),
     Array()
   ),
   Array(
-    "Аккумуляторы давления",
-    "",
+    "Цепи противоскольжения для лесной техники",
+    "/catalog/tsepi-protivoskolzheniya-dlya-lesnoy-tekhniki/",
     Array(),
     Array()
   ),
   Array(
-    "Манометры",
-    "",
+    "Гусеницы и моногусеницы",
+    "/catalog/gusenitsy-i-monogusenitsy/",
     Array(),
     Array()
   ),
   Array(
-    "Быстроразъемные соединения (БРС)",
-    "",
+    "Грейдерные ножи",
+    "/catalog/greydernye-nozhi/",
+    Array(),
+    Array()
+  ),
+  Array(
+    "Ножи для фронтальных погрузчиков",
+    "/catalog/nozhi-dlya-frontalnykh-pogruzchikov/",
+    Array(),
+    Array()
+  ),
+  Array(
+    "Сталь для ремонта ковшей",
+    "/catalog/stal-dlya-remonta-kovshey/",
     Array(),
     Array()
   )

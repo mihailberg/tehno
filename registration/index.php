@@ -56,25 +56,42 @@ $APPLICATION->SetTitle("Регистрация");
         "SET_TITLE" => "Y", 
         "USER_PROPERTY" => Array("UF_CITY"),
         "SEF_FOLDER" => "/", 
-        "VARIABLE_ALIASES" => Array()
+        "VARIABLE_ALIASES" => Array(),
+    "FORM_TYPE" => "FIZ"
     )
 );?> 
 </div>
    
     <div class="d_box2"> 
-<?$APPLICATION->IncludeComponent("bitrix:main.register","jur",Array(
-        "USER_PROPERTY_NAME" => "", 
-        "SEF_MODE" => "Y", 
-        "SHOW_FIELDS" => Array("NAME", "PERSONAL_PHONE", "WORK_COMPANY"),
-        "REQUIRED_FIELDS" => Array("NAME", "PERSONAL_PHONE", "WORK_COMPANY"),
-        "AUTH" => "Y", 
-        "USE_BACKURL" => "Y", 
-        "SUCCESS_PAGE" => "", 
-        "SET_TITLE" => "Y", 
-        "USER_PROPERTY" => Array("UF_CITY","UF_LEGAL","UF_DETAILS"),
-        "SEF_FOLDER" => "/", 
-        "VARIABLE_ALIASES" => Array()
-    )
+<?$APPLICATION->IncludeComponent(
+	"bitrix:main.register", 
+	"jur", 
+	array(
+		"USER_PROPERTY_NAME" => "",
+		"SEF_MODE" => "Y",
+		"SHOW_FIELDS" => array(
+			0 => "NAME",
+			1 => "PERSONAL_PHONE",
+			2 => "WORK_COMPANY",
+		),
+		"REQUIRED_FIELDS" => array(
+			0 => "NAME",
+			1 => "PERSONAL_PHONE",
+			2 => "WORK_COMPANY",
+		),
+		"AUTH" => "Y",
+		"USE_BACKURL" => "Y",
+		"SUCCESS_PAGE" => "",
+		"SET_TITLE" => "Y",
+		"USER_PROPERTY" => array(
+			0 => "UF_LEGAL",
+			1 => "UF_DETAILS",
+			2 => "UF_CITY",
+		),
+		"SEF_FOLDER" => "/",
+		"FORM_TYPE" => "JUR"
+	),
+	false
 );?> 
  </div>
    </div>

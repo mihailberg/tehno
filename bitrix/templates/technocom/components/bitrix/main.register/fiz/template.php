@@ -22,7 +22,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
 
 <?if($USER->IsAuthorized()):?>
 
-<p><?echo GetMessage("MAIN_REGISTER_AUTH")?></p>
+<p style="text-align: center;"><?echo GetMessage("MAIN_REGISTER_AUTH")?></p>
 
 <?else:?>
 <?
@@ -39,6 +39,7 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
 <?endif?>
 
 <form method="post" action="<?=POST_FORM_ACTION_URI?>" name="regform_fiz" enctype="multipart/form-data">
+  <input type="hidden" name="FORM_TYPE" value="<?=$arParams['FORM_TYPE']?>" />
     <?$pass = randString(7, array(
         "abcdefghijklnmopqrstuvwxyz",
         "ABCDEFGHIJKLNMOPQRSTUVWX­YZ",
