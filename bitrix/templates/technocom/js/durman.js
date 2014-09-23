@@ -412,7 +412,8 @@ var form = {
       action: form.attr('action'),
       method: form.attr('method'),
       data: {},
-      err: form.find('[data-error]')
+      err: form.find('[data-error]'),
+      good: form.data('good')
     };
     this.handler(name);
   },
@@ -439,7 +440,7 @@ var form = {
       success: function(response) {
         if (response != '') form.forms[name].err.html(response);
         else {
-          form.forms[name].err.html('<div class="goodtext">Заявка отправлена</div>');
+          form.forms[name].err.html('<div class="goodtext">' + form.forms[name].good + '</div>');
           setTimeout(function() {
             form.forms[name].err.html('');
             setTimeout(function() {

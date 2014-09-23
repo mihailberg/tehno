@@ -129,7 +129,7 @@ $_SESSION['CONTACTS'] = $contacts;
 <div id="callback" style="display: none;">
   <div class="vik-order-fast">
     <div class="vik-order-fast__bg">
-      <form action="/form_handler.php" method="post" name="callback">
+      <form action="/form_handler.php" method="post" name="callback" data-good="Заявка отправлена">
         <div class="vik-order__title-sm"><strong>Заказать звонок</strong> нашего менеджера</div>
         <p>Просто заполните форму ниже и наш менеджер позвонит<br> Вам в удобное время и уточнит детали по оплате и доставке!</p>
 
