@@ -21,7 +21,7 @@ foreach($arResult["ITEMS"]["DelDelCanBuy"] as $arBasketItems)
     endif;
     ?>
     <tr>
-        <td class="recycle-page__name"><div><img src="<?=$url?>"><a href="#"><?echo $arBasketItems["NAME"]?></a><div class="recycle-page__art">арт. <?=$arBasketItems['PROPERTY_ARTICLE_VALUE']?></div></div></td>
+        <td class="recycle-page__name"><div><img src="<?=$url?>"><a href="<?=$arBasketItems["DETAIL_PAGE_URL"] ?>"><?echo $arBasketItems["NAME"]?></a><div class="recycle-page__art">арт. <?=$arBasketItems['PROPERTY_ARTICLE_VALUE']?></div></div></td>
         <td></td>
         <td><div data-cost="<?=$arBasketItems["PRICE_FORMATED"]?>" class="recycle-page__sum"><span><?=$arBasketItems["PRICE_FORMATED"]?></span> руб.</div></td>
         <td class="recycle-page__actions_hold">

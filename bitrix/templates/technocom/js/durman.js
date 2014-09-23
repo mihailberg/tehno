@@ -36,7 +36,8 @@ var add2basket = {
 
   opts: {
     buy: '.js-add2basket',
-    modal: '.js-add2basket-modal'
+    modal: '.js-add2basket-modal',
+    counter: '.js-add2basket-counter'
   },
 
   init: function() {
@@ -47,14 +48,18 @@ var add2basket = {
 
   buyHandler: function() {
     $(add2basket.opts.buy).click(function() {
-      var url = $(this).attr('href');
+      var $this = $(this),
+          url = $this.attr('href'),
+          id = $this.data('id');
       $.ajax({
         type: 'post',
         url: url,
         cached: false,
-        success: function(t) {
+        success: function() {
+          var count = parseInt($(add2basket.opts.counter).text())
+            ? parseInt($(add2basket.opts.counter).text()) + 1 : 1;
+          $(add2basket.opts.counter).text(count);
           add2basket.modalShow();
-          console.log(t);
           setTimeout(add2basket.modalHide, 1500);
         }
       });
@@ -271,7 +276,8 @@ if ($('.page_not').length) {
 var basketPostponed = {
 
   opts: {
-    tabs: '.x_tabs__links a'
+    tabs: '.x_tabs__links a',
+    tabsContent: '.x_tabs__item'
   },
 
   tabs: {},
@@ -283,7 +289,9 @@ var basketPostponed = {
 
   showPostponed: function() {
     $(this.opts.tabs + ':eq(0)').removeClass('selected');
+    $(this.opts.tabsContent + ':eq(0)').removeClass('selected');
     $(this.opts.tabs + ':eq(1)').addClass('selected');
+    $(this.opts.tabsContent + ':eq(1)').addClass('selected');
   }
 
 };

@@ -29,7 +29,7 @@
             </div>
             <div class="user__row user__row_mod">
                 <?$APPLICATION->IncludeComponent(
-                    "bitrix:sale.basket.basket.line",
+                    "tehno:sale.basket.basket.line",
                     "tehno_head_cart",
                     array(
                         "PATH_TO_BASKET" => SITE_DIR."cart/",

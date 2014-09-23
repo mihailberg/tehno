@@ -52,9 +52,9 @@ a:hover { text-decoration: none; border-bottom: 2px solid #ffa200;}
 .header .header__center { float: left; margin-left: 110px; }
 .header .header__address, .header .header__phone, .header .online-assist, .header .callback, .header .skype, .header .user__link_basket, .header .user__link_mail { position: relative; margin-bottom: 18px; padding-left: 70px; border-bottom: none;}
 .user__link {border-bottom: none;display: inline-block;}
-.user__link span {border-bottom: 2px solid #333333;}
+.user__link span.b {border-bottom: 2px solid #333333;}
 .user__link:hover {border-bottom: none !important;}
-.user__link span:hover {border-bottom: 2px solid #ffa200; color: #ffa200;}
+.user__link span.b:hover {border-bottom: 2px solid #ffa200; color: #ffa200;}
 .header .header__address:before, .header .header__address .online-assist__pic, .header .header__address .callback__pic, .header .header__address .skype__pic, .header .header__phone:before, .header .header__phone .online-assist__pic, .header .header__phone .callback__pic, .header .header__phone .skype__pic, .header .online-assist:before, .header .online-assist .online-assist__pic, .header .online-assist .callback__pic, .header .online-assist .skype__pic, .header .callback:before, .header .callback .online-assist__pic, .header .callback .callback__pic, .header .callback .skype__pic, .header .skype:before, .header .skype .online-assist__pic, .header .skype .callback__pic, .header .skype .skype__pic, .header .user__link_basket:before, .header .user__link_basket .online-assist__pic, .header .user__link_basket .callback__pic, .header .user__link_basket .skype__pic, .header .user__link_mail:before, .header .user__link_mail .online-assist__pic, .header .user__link_mail .callback__pic, .header .user__link_mail .skype__pic { position: absolute; content: ""; top: 0; left: 0; }
 .header .online-assist, .header .callback, .header .skype { line-height: 1.65; cursor: pointer;}
 .header .online-assist:hover, .header .callback:hover, .header .skype:hover { text-decoration: none; border-bottom: none !important;}

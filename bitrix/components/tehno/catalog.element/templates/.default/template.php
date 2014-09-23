@@ -49,7 +49,7 @@
         <h3><?=$arResult['DISPLAY_PROPERTIES']['H2']['VALUE']?></h3>
       <?endif;?>
       <?if($USER->IsAuthorized()): // Если пользователь авторизован, выводим одну цену ?>
-          <div class="product-detail__cost"><span><?=$price?></span> <span class="product-detail__currency"></span><a class="btn btn_green btn_big js-add2basket" href="<?=$arResult['ADD_URL']?>">В корзину</a> <a href="#" class="btn btn_silver btn_middle">Отложить</a> <a href="#" class="btn btn_blue btn_middle"><i class="callback__pic"></i>Позвонить мне</a></div>
+          <div class="product-detail__cost"><span><?=$price?></span> <span class="product-detail__currency"></span><a class="btn btn_green btn_big js-add2basket" data-id="<?=$arResult['ID']?>" href="<?=$arResult['ADD_URL']?>">В корзину</a> <a href="#" class="btn btn_silver btn_middle">Отложить</a> <a href="#" class="btn btn_blue btn_middle"><i class="callback__pic"></i>Позвонить мне</a></div>
       <? else: //Если не авторизован Сначала цену 0 потом цену 1?>
           <div class="product-detail__cost"><span><?=(int)$prices[0]["PRICE"]?></span> <span class="product-detail__currency"></span><a class="btn btn_green btn_big js-add2basket" href="<?=$arResult['ADD_URL']?>">В корзину</a> <a href="#" class="btn btn_silver btn_middle">Отложить</a> <a href="#" class="btn btn_blue btn_middle"><i class="callback__pic"></i>Позвонить мне</a></div>
           <div class="product-detail__cost_after">Цена после <a href="/registration">регистрации</a> <span><?=(int)$prices[1]["PRICE"]?> P</span></div>
