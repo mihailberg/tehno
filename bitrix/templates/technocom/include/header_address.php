@@ -122,6 +122,39 @@ $_SESSION['CONTACTS'] = $contacts;
 <!-- contacts block. center -->
 <div class="header__center">
     <a class="online-assist" onclick="javascript:jivo_api.open();"><i class="online-assist__pic"></i><span>Онлайн-консультант</span></a><br />
-    <a class="callback"><i class="callback__pic"></i><span>Заказать обратный звонок</span></a><br />
+    <a class="callback"><i class="callback__pic"></i><span data-modal-button="callback">Заказать обратный звонок</span></a><br />
     <a class="skype" href="skype:<?=$contacts['PROPERTY_SKYPE_VALUE'];//Скайп?>"><i class="skype__pic"></i><span><?=$contacts['PROPERTY_SKYPE_VALUE'];//Скайп?></span></a>
+</div>
+
+<div id="callback" style="display: none;">
+  <div class="vik-order-fast">
+    <div class="vik-order-fast__bg">
+      <form action="/">
+        <div class="vik-order__title-sm"><strong>Заказать звонок</strong> нашего менеджера</div>
+        <p>Просто заполните форму ниже и наш менеджер позвонит<br> Вам в удобное время и уточнит детали по оплате и доставке!</p>
+
+        <div class="vik-order__form-col clearfix">
+          <label for="/">Имя:</label>
+          <input type="text" class="vik-inptxt-style" placeholder="Константин Константинопольский">
+        </div>
+
+        <div class="vik-order__form-col clearfix">
+          <label for="/">Телефон:</label>
+          <input type="text" class="vik-inptxt-style vik-numb-phone-mask" placeholder="+7 (900) 555-55-55">
+        </div>
+
+        <div class="vik-order__form-col clearfix">
+          <label for="/">Удобное для звонка время:</label>
+          <input type="text" class="vik-inptxt-style vik-inptxt-style__small" placeholder="12 - 18">
+          <span class="vik-order__form-col__sm-txt">с понедельника по пятницу</span>
+        </div>
+
+        <div class="vik-order__form-col vik-order__form-col_btn clearfix">
+          <input type="submit" class="vik-btn-large vik-btn-green" value="Позвонить мне!">
+          <span class="vik-order__form-col_btn-sm">или <a href="#" data-modal-close>отменить заказ</a></span>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>

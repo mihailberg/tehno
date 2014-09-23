@@ -299,3 +299,78 @@ var basketPostponed = {
 $(function() {
   basketPostponed.init();
 });
+
+var modalWindow = {
+
+  body: {},
+  zoom: 0,
+  shadow: false,
+  modals: [],
+
+  init: function(name, width, height) {
+    if (this.modals[name] == true) return false;
+    this.body = $('body');
+    this.zoom = getCookie('clientZoom');
+    this.createStyle();
+    if (!this.shadow) this.createShadow();
+    this.modals[name] = true;
+    this.createWindow(name, width, height);
+    this.handler(name);
+    this.handlerClose();
+  },
+
+  createStyle: function() {
+    var style = '', zoom = this.zoom;
+    style += '<style type="text/css">';
+    style += '.modal-window-shadow { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); cursor: pointer; z-index: 900; }';
+    style += '.modal-window { display: none; position: fixed; top: 50%; left: 50%; z-index: 999; transform-origin: left top; -webkit-transform-origin: left top; -ms-transform-origin: left top; transform: scale(' + zoom + '); -o-transform: scale(' + zoom + '); -webkit-transform: scale(' + zoom + '); -ms-transform: scale(' + zoom + '); -moz-transform: scale(' + zoom + '); }';
+    style += '</style>';
+    $(style).appendTo(this.body);
+  },
+
+  createShadow: function() {
+    var shadow = '<div class="modal-window-shadow"></div>';
+    this.shadow = $(shadow).appendTo(this.body);
+  },
+
+  createWindow: function(name, width, height) {
+    var form = '';
+    form += '<div class="modal-window" data-modal-name="' + name + '"></div>';
+    $(form).css({
+      width: width,
+      height: height,
+      marginTop: '-' + ((height * this.zoom) / 2) + 'px',
+      marginLeft: '-' + ((width * this.zoom) / 2) + 'px'
+    }).html($('#' + name).html()).appendTo(this.body);
+  },
+
+  handler: function(name) {
+    $('[data-modal-button=' + name + ']').click(function() {
+      modalWindow.modalShow(name);
+    });
+  },
+
+  handlerClose: function() {
+    this.shadow.click(function() {
+      modalWindow.modalClose();
+    });
+    $('[data-modal-close]').click(function() {
+      modalWindow.modalClose();
+    });
+  },
+
+  modalShow: function(name) {
+    this.shadow.css('display', 'block');
+    $('[data-modal-name=' + name + ']').css('display', 'block');
+  },
+
+  modalClose: function() {
+    this.shadow.css('display', 'none');
+    $('[data-modal-name]').css('display', 'none');
+  }
+
+};
+
+$(function() {
+  modalWindow.init('callback', 1140, 880);
+});
