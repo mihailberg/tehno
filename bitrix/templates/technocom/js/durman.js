@@ -303,45 +303,59 @@ $(function() {
 var modalWindow = {
 
   body: {},
-  zoom: 0,
+  zoom: 1,
   shadow: false,
   modals: [],
+  modalsName: [],
 
   init: function(name, width, height) {
-    if (this.modals[name] == true) return false;
+    if (this.modals[name]) return false;
+    else {
+      this.modals[name] = {
+        name: name,
+        width: width,
+        height: height
+      };
+      this.modalsName.push(name);
+    }
     this.body = $('body');
     this.zoom = getCookie('clientZoom');
-    this.createStyle();
-    if (!this.shadow) this.createShadow();
-    this.modals[name] = true;
-    this.createWindow(name, width, height);
+    this.printStyle();
+    if (!this.shadow) this.printShadow();
+    this.printWindow(name);
     this.handler(name);
     this.handlerClose();
   },
 
-  createStyle: function() {
+  printStyle: function() {
     var style = '', zoom = this.zoom;
-    style += '<style type="text/css">';
+    if ($('#js-modal-style').length) $('#js-modal-style').remove();
+    style += '<style type="text/css" id="js-modal-style">';
     style += '.modal-window-shadow { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); cursor: pointer; z-index: 900; }';
     style += '.modal-window { display: none; position: fixed; top: 50%; left: 50%; z-index: 999; transform-origin: left top; -webkit-transform-origin: left top; -ms-transform-origin: left top; transform: scale(' + zoom + '); -o-transform: scale(' + zoom + '); -webkit-transform: scale(' + zoom + '); -ms-transform: scale(' + zoom + '); -moz-transform: scale(' + zoom + '); }';
     style += '</style>';
     $(style).appendTo(this.body);
   },
 
-  createShadow: function() {
+  printShadow: function() {
     var shadow = '<div class="modal-window-shadow"></div>';
     this.shadow = $(shadow).appendTo(this.body);
   },
 
-  createWindow: function(name, width, height) {
-    var form = '';
-    form += '<div class="modal-window" data-modal-name="' + name + '"></div>';
-    $(form).css({
-      width: width,
-      height: height,
-      marginTop: '-' + ((height * this.zoom) / 2) + 'px',
-      marginLeft: '-' + ((width * this.zoom) / 2) + 'px'
-    }).html($('#' + name).html()).appendTo(this.body);
+  printWindow: function(name) {
+    var modal = '', html = $('#' + name).html(); $('#' + name).html('');
+    modal += '<div class="modal-window" data-modal-name="' + name + '"></div>';
+    $(modal).html(html).appendTo(this.body);
+    this.setModalWindowCss(name);
+  },
+
+  setModalWindowCss: function(name) {
+    $('[data-modal-name=' + name + ']').css({
+      width: this.modals[name].width,
+      height: this.modals[name].height,
+      marginTop: '-' + ((this.modals[name].height * this.zoom) / 2) + 'px',
+      marginLeft: '-' + ((this.modals[name].width * this.zoom) / 2) + 'px'
+    });
   },
 
   handler: function(name) {
@@ -367,10 +381,81 @@ var modalWindow = {
   modalClose: function() {
     this.shadow.css('display', 'none');
     $('[data-modal-name]').css('display', 'none');
+  },
+
+  modalResize: function(zoom) {
+    this.zoom = zoom;
+    this.printStyle();
+    for (var i = 0; i < this.modalsName.length; i++)
+      modalWindow.setModalWindowCss(this.modalsName[i]);
   }
 
 };
 
 $(function() {
-  modalWindow.init('callback', 1140, 880);
+  modalWindow.init('callback', 1140, 1030);
+});
+
+var form = {
+
+  forms: [],
+
+  init: function(name) {
+    if (this.forms[name]) {
+      console.log('Form with name: "' + name + '" exist.');
+      return false;
+    }
+    var form = $('[name=' + name + ']');
+    this.forms[name] = {
+      name: name,
+      form: form,
+      action: form.attr('action'),
+      method: form.attr('method'),
+      data: {},
+      err: form.find('[data-error]')
+    };
+    this.handler(name);
+  },
+
+  handler: function(name) {
+    this.forms[name].form.find('[type=submit]').click(function() {
+      form.forms[name].form.find('input, textarea').each(function() {
+        var $this = $(this),
+            input_name = $this.attr('name'),
+            input_value = $this.val();
+        form.forms[name].data[input_name] = input_value;
+      });
+      form.ajax(name);
+      return false;
+    });
+  },
+
+  ajax: function(name) {
+    $.ajax({
+      url: this.forms[name].action,
+      type: this.forms[name].method,
+      cache: false,
+      data: this.forms[name].data,
+      success: function(response) {
+        if (response != '') form.forms[name].err.html(response);
+        else {
+          form.forms[name].err.html('<div class="goodtext">Заявка отправлена</div>');
+          setTimeout(function() {
+            form.forms[name].err.html('');
+            setTimeout(function() {
+              modalWindow.modalClose();
+            }, 2000);
+          }, 5000);
+          form.forms[name].form.find('input[type=text], textarea').each(function() {
+            $(this).val('');
+          });
+        }
+      }
+    });
+  }
+
+};
+
+$(function() {
+  form.init('callback');
 });

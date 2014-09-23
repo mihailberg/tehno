@@ -129,30 +129,40 @@ $_SESSION['CONTACTS'] = $contacts;
 <div id="callback" style="display: none;">
   <div class="vik-order-fast">
     <div class="vik-order-fast__bg">
-      <form action="/">
+      <form action="/form_handler.php" method="post" name="callback">
         <div class="vik-order__title-sm"><strong>Заказать звонок</strong> нашего менеджера</div>
         <p>Просто заполните форму ниже и наш менеджер позвонит<br> Вам в удобное время и уточнит детали по оплате и доставке!</p>
 
         <div class="vik-order__form-col clearfix">
           <label for="/">Имя:</label>
-          <input type="text" class="vik-inptxt-style" placeholder="Константин Константинопольский">
+          <input type="text" class="vik-inptxt-style" name="form_text_1" placeholder="Константин Константинопольский">
         </div>
 
         <div class="vik-order__form-col clearfix">
           <label for="/">Телефон:</label>
-          <input type="text" class="vik-inptxt-style vik-numb-phone-mask" placeholder="+7 (900) 555-55-55">
+          <input type="text" class="vik-inptxt-style vik-numb-phone-mask mask-tel" name="form_text_2" placeholder="+7 (900) 555-55-55">
         </div>
 
         <div class="vik-order__form-col clearfix">
           <label for="/">Удобное для звонка время:</label>
-          <input type="text" class="vik-inptxt-style vik-inptxt-style__small" placeholder="12 - 18">
+          <input type="text" class="vik-inptxt-style vik-inptxt-style__small" name="form_text_3" placeholder="12 - 18">
           <span class="vik-order__form-col__sm-txt">с понедельника по пятницу</span>
         </div>
 
+        <div class="vik-order__form-col clearfix">
+          <label for="/">Сообщение/Вопрос:</label>
+          <textarea class="vik-inptxt-style vik-inptxt-style__small" name="form_textarea_4" placeholder="Сообщение/Вопрос"></textarea>
+        </div>
+
+        <div class="vik-order__form-col clearfix" data-error></div>
+
         <div class="vik-order__form-col vik-order__form-col_btn clearfix">
-          <input type="submit" class="vik-btn-large vik-btn-green" value="Позвонить мне!">
+          <input type="submit" class="vik-btn-large vik-btn-green" name="web_form_submit" value="Позвонить мне!">
           <span class="vik-order__form-col_btn-sm">или <a href="#" data-modal-close>отменить заказ</a></span>
         </div>
+
+        <input type="hidden" name="sessid" id="sessid" value="4584e1d62898750a11e1bc95d48ba19a">
+        <input type="hidden" name="WEB_FORM_ID" value="1">
 
       </form>
     </div>

@@ -82,6 +82,7 @@ $( document ).ready(function() {
 
         //Кука зумы
         setCookie('clientZoom', zoom, {path:'/',expires: date.toUTCString()});
+    modalWindow.modalResize(zoom);
 	}
 	
 	function checkZoom() {
